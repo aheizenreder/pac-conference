@@ -13,3 +13,40 @@ jboss/server/minimal/log/*.log
 jboss/server/minimal/tmp/**/*
 jboss/server/minimal/data/**/*
 jboss/server/minimal/work/**/*
+
+
+# Classfiles
+*target*
+*.class
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# eclipse specific git ignore
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+# Ignore Plugin_Ressources
+Plugin_Ressources*
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# Ignore vim backup files
+*~
