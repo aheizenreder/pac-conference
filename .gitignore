@@ -43,7 +43,7 @@ local.properties
 # External tool builders
 .externalToolBuilders/
 # Ignore Plugin_Ressources
-Plugin_Ressources*
+Plugin_Resources*
 
 # Locally stored "Eclipse launch configurations"
 *.launch
