@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
+  <elementImport xmi:id="_CGZkYESZEeOSoZE-lX0B5Q">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_CGcAoESZEeOSoZE-lX0B5Q">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <elementImport xmi:id="_CGcAoUSZEeOSoZE-lX0B5Q">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_CGcAokSZEeOSoZE-lX0B5Q">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="pac-conference">
+    <packagedElement xmi:type="uml:Package" xmi:id="_sQtHoESREeOSoZE-lX0B5Q" name="Use Cases">
+      <packagedElement xmi:type="uml:Actor" xmi:id="__IBL4ESREeOSoZE-lX0B5Q" name="User"/>
+      <packagedElement xmi:type="uml:Actor" xmi:id="_EstjgESSEeOSoZE-lX0B5Q" name="Administrator"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_uV1oIESREeOSoZE-lX0B5Q" name="Model">
+      <packagedElement xmi:type="uml:Class" xmi:id="_CkGJ0ESVEeOSoZE-lX0B5Q" name="Conference">
+        <ownedAttribute xmi:id="_ZbmwQESZEeOSoZE-lX0B5Q" name="title">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_boBkgESZEeOSoZE-lX0B5Q" name="description">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_dN4IAESZEeOSoZE-lX0B5Q" name="startDate" type="_ndRUMESZEeOSoZE-lX0B5Q"/>
+        <ownedAttribute xmi:id="_e-0hMESZEeOSoZE-lX0B5Q" name="endDate" type="_ndRUMESZEeOSoZE-lX0B5Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_ENMRwESZEeOSoZE-lX0B5Q" name="Date">
+        <ownedAttribute xmi:id="_H4dCkESZEeOSoZE-lX0B5Q" name="day">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_Kef3wESZEeOSoZE-lX0B5Q" name="month">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_LxyEkESZEeOSoZE-lX0B5Q" name="year">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_ndRUMESZEeOSoZE-lX0B5Q" name="DateTime">
+        <generalization xmi:id="_rAfjUESZEeOSoZE-lX0B5Q" general="_ENMRwESZEeOSoZE-lX0B5Q"/>
+        <ownedAttribute xmi:id="_tDeHsESZEeOSoZE-lX0B5Q" name="hour">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_uEQPQESZEeOSoZE-lX0B5Q" name="minutes">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_BXwgQESaEeOSoZE-lX0B5Q" name="Location">
+        <ownedAttribute xmi:id="_ZpE5oESbEeOSoZE-lX0B5Q" name="name">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_a9hkEESbEeOSoZE-lX0B5Q" name="description">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_cYK9IESbEeOSoZE-lX0B5Q" name="address">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_C2ZBcESaEeOSoZE-lX0B5Q" name="Room">
+        <ownedAttribute xmi:id="_XKBSsUSaEeOSoZE-lX0B5Q" name="name">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_Zh6XIESaEeOSoZE-lX0B5Q" name="capacity">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_D_pvkESaEeOSoZE-lX0B5Q" name="Talk">
+        <ownedAttribute xmi:id="_pWRnwESaEeOSoZE-lX0B5Q" name="title">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_sHz7QESaEeOSoZE-lX0B5Q" name="description">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_3HhKEESaEeOSoZE-lX0B5Q" name="start" type="_ndRUMESZEeOSoZE-lX0B5Q"/>
+        <ownedAttribute xmi:id="_7qwEsESaEeOSoZE-lX0B5Q" name="duration">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_FdTZUESaEeOSoZE-lX0B5Q" name="Speaker">
+        <ownedAttribute xmi:id="_P03qEESaEeOSoZE-lX0B5Q" name="name">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_Tsk7cESaEeOSoZE-lX0B5Q" name="description">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_5hAUgESbEeOSoZE-lX0B5Q" name="presents" memberEnd="_5hAUgUSbEeOSoZE-lX0B5Q _5hAUhESbEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_5hAUgUSbEeOSoZE-lX0B5Q" name="speaker" type="_FdTZUESaEeOSoZE-lX0B5Q" association="_5hAUgESbEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5hAUgkSbEeOSoZE-lX0B5Q" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5hAUg0SbEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_5hAUhESbEeOSoZE-lX0B5Q" name="talk" type="_D_pvkESaEeOSoZE-lX0B5Q" association="_5hAUgESbEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5hAUhUSbEeOSoZE-lX0B5Q" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5hAUhkSbEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_TSA0cEScEeOSoZE-lX0B5Q" name="part of" memberEnd="_TSA0cUScEeOSoZE-lX0B5Q _TSA0dEScEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_TSA0cUScEeOSoZE-lX0B5Q" name="talk" type="_D_pvkESaEeOSoZE-lX0B5Q" association="_TSA0cEScEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_TSA0ckScEeOSoZE-lX0B5Q" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_TSA0c0ScEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_TSA0dEScEeOSoZE-lX0B5Q" name="conference" type="_CkGJ0ESVEeOSoZE-lX0B5Q" association="_TSA0cEScEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_TSA0dUScEeOSoZE-lX0B5Q" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_TSA0dkScEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_qZQc0EScEeOSoZE-lX0B5Q" name="take_place" memberEnd="_qZQc0UScEeOSoZE-lX0B5Q _qZQc1EScEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_qZQc0UScEeOSoZE-lX0B5Q" name="conference" type="_CkGJ0ESVEeOSoZE-lX0B5Q" association="_qZQc0EScEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qZQc0kScEeOSoZE-lX0B5Q" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qZQc00ScEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_qZQc1EScEeOSoZE-lX0B5Q" name="location" type="_BXwgQESaEeOSoZE-lX0B5Q" association="_qZQc0EScEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qZQc1UScEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qZQc1kScEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_JG7EAESdEeOSoZE-lX0B5Q" name="has" memberEnd="_JG7EAUSdEeOSoZE-lX0B5Q _JG7EBESdEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_JG7EAUSdEeOSoZE-lX0B5Q" name="location" type="_BXwgQESaEeOSoZE-lX0B5Q" association="_JG7EAESdEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JG7EAkSdEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JG7EA0SdEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_JG7EBESdEeOSoZE-lX0B5Q" name="room" visibility="public" type="_C2ZBcESaEeOSoZE-lX0B5Q" association="_JG7EAESdEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JG7EBUSdEeOSoZE-lX0B5Q" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JG7EBkSdEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_v0vPEESREeOSoZE-lX0B5Q" name="Components"/>
+  </packagedElement>
+</uml:Model>
