@@ -16,6 +16,105 @@
     <packagedElement xmi:type="uml:Package" xmi:id="_sQtHoESREeOSoZE-lX0B5Q" name="Use Cases">
       <packagedElement xmi:type="uml:Actor" xmi:id="__IBL4ESREeOSoZE-lX0B5Q" name="User"/>
       <packagedElement xmi:type="uml:Actor" xmi:id="_EstjgESSEeOSoZE-lX0B5Q" name="Administrator"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_KOXIIEWYEeOSoZE-lX0B5Q" name="List conferences"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_M9F_QEWYEeOSoZE-lX0B5Q" name="List talks"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_OcVkcEWYEeOSoZE-lX0B5Q" name="List speakers"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_P65NIEWYEeOSoZE-lX0B5Q" name="List locations"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_RtbhwEWYEeOSoZE-lX0B5Q" name="List rooms"/>
+      <packagedElement xmi:type="uml:Association" xmi:id="_eT4r8EWYEeOSoZE-lX0B5Q" name="A_&lt;user>_&lt;list conferences>" memberEnd="_eT4r8UWYEeOSoZE-lX0B5Q _eT4r9EWYEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_eT4r8UWYEeOSoZE-lX0B5Q" name="user" type="__IBL4ESREeOSoZE-lX0B5Q" association="_eT4r8EWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_eT4r8kWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_eT4r80WYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_eT4r9EWYEeOSoZE-lX0B5Q" name="list conferences" type="_KOXIIEWYEeOSoZE-lX0B5Q" association="_eT4r8EWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_eT4r9UWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_eT4r9kWYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_fW1WsEWYEeOSoZE-lX0B5Q" name="A_&lt;user>_&lt;list talks>" memberEnd="_fW1WsUWYEeOSoZE-lX0B5Q _fW1WtEWYEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_fW1WsUWYEeOSoZE-lX0B5Q" name="user" type="__IBL4ESREeOSoZE-lX0B5Q" association="_fW1WsEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fW1WskWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fW1Ws0WYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_fW1WtEWYEeOSoZE-lX0B5Q" name="list talks" type="_M9F_QEWYEeOSoZE-lX0B5Q" association="_fW1WsEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fW1WtUWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fW1WtkWYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_gTqyYEWYEeOSoZE-lX0B5Q" name="A_&lt;user>_&lt;list speakers>" memberEnd="_gTqyYUWYEeOSoZE-lX0B5Q _gTqyZEWYEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_gTqyYUWYEeOSoZE-lX0B5Q" name="user" type="__IBL4ESREeOSoZE-lX0B5Q" association="_gTqyYEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gTqyYkWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gTqyY0WYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_gTqyZEWYEeOSoZE-lX0B5Q" name="list speakers" type="_OcVkcEWYEeOSoZE-lX0B5Q" association="_gTqyYEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gTqyZUWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gTqyZkWYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_ht8YAEWYEeOSoZE-lX0B5Q" name="A_&lt;user>_&lt;list locations>" memberEnd="_ht8YAUWYEeOSoZE-lX0B5Q _ht8YBEWYEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_ht8YAUWYEeOSoZE-lX0B5Q" name="user" type="__IBL4ESREeOSoZE-lX0B5Q" association="_ht8YAEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ht8YAkWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ht8YA0WYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_ht8YBEWYEeOSoZE-lX0B5Q" name="list locations" type="_P65NIEWYEeOSoZE-lX0B5Q" association="_ht8YAEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ht8YBUWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ht8YBkWYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_iXPzsEWYEeOSoZE-lX0B5Q" name="A_&lt;user>_&lt;list rooms>" memberEnd="_iXPzsUWYEeOSoZE-lX0B5Q _iXPztEWYEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_iXPzsUWYEeOSoZE-lX0B5Q" name="user" type="__IBL4ESREeOSoZE-lX0B5Q" association="_iXPzsEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iXPzskWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iXPzs0WYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_iXPztEWYEeOSoZE-lX0B5Q" name="list rooms" type="_RtbhwEWYEeOSoZE-lX0B5Q" association="_iXPzsEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iXPztUWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iXPztkWYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_kxH1IEWYEeOSoZE-lX0B5Q" name="Manage conference"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_qPb38EWYEeOSoZE-lX0B5Q" name="Manage location"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_sInAEEWYEeOSoZE-lX0B5Q" name="Manage talks"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_vyZxQEWYEeOSoZE-lX0B5Q" name="Manage speakers"/>
+      <packagedElement xmi:type="uml:Association" xmi:id="_2NhakEWYEeOSoZE-lX0B5Q" name="A_&lt;administrator>_&lt;manage conference>" memberEnd="_2NhakUWYEeOSoZE-lX0B5Q _2NhalEWYEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_2NhakUWYEeOSoZE-lX0B5Q" name="administrator" type="_EstjgESSEeOSoZE-lX0B5Q" association="_2NhakEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2NhakkWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2Nhak0WYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_2NhalEWYEeOSoZE-lX0B5Q" name="manage conference" type="_kxH1IEWYEeOSoZE-lX0B5Q" association="_2NhakEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2NhalUWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2NhalkWYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_2tSfwEWYEeOSoZE-lX0B5Q" name="A_&lt;administrator>_&lt;manage location>" memberEnd="_2tSfwUWYEeOSoZE-lX0B5Q _2tSfxEWYEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_2tSfwUWYEeOSoZE-lX0B5Q" name="administrator" type="_EstjgESSEeOSoZE-lX0B5Q" association="_2tSfwEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2tSfwkWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2tSfw0WYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_2tSfxEWYEeOSoZE-lX0B5Q" name="manage location" type="_qPb38EWYEeOSoZE-lX0B5Q" association="_2tSfwEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2tSfxUWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2tSfxkWYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3DsNkEWYEeOSoZE-lX0B5Q" name="A_&lt;administrator>_&lt;manage talks>" memberEnd="_3DsNkUWYEeOSoZE-lX0B5Q _3DsNlEWYEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_3DsNkUWYEeOSoZE-lX0B5Q" name="administrator" type="_EstjgESSEeOSoZE-lX0B5Q" association="_3DsNkEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3DsNkkWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3DsNk0WYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_3DsNlEWYEeOSoZE-lX0B5Q" name="manage talks" type="_sInAEEWYEeOSoZE-lX0B5Q" association="_3DsNkEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3DsNlUWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3DsNlkWYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3bwvUEWYEeOSoZE-lX0B5Q" name="A_&lt;administrator>_&lt;manage speakers>" memberEnd="_3bwvUUWYEeOSoZE-lX0B5Q _3bwvVEWYEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_3bwvUUWYEeOSoZE-lX0B5Q" name="administrator" type="_EstjgESSEeOSoZE-lX0B5Q" association="_3bwvUEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3bwvUkWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3bwvU0WYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_3bwvVEWYEeOSoZE-lX0B5Q" name="manage speakers" type="_vyZxQEWYEeOSoZE-lX0B5Q" association="_3bwvUEWYEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3bwvVUWYEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3bwvVkWYEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_uV1oIESREeOSoZE-lX0B5Q" name="Model">
       <packagedElement xmi:type="uml:Class" xmi:id="_CkGJ0ESVEeOSoZE-lX0B5Q" name="Conference">
@@ -103,7 +202,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_TSA0c0ScEeOSoZE-lX0B5Q" value="1"/>
         </ownedEnd>
         <ownedEnd xmi:id="_TSA0dEScEeOSoZE-lX0B5Q" name="conference" type="_CkGJ0ESVEeOSoZE-lX0B5Q" association="_TSA0cEScEeOSoZE-lX0B5Q">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_TSA0dUScEeOSoZE-lX0B5Q" value="*"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_TSA0dUScEeOSoZE-lX0B5Q" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_TSA0dkScEeOSoZE-lX0B5Q" value="1"/>
         </ownedEnd>
       </packagedElement>
@@ -127,7 +226,104 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JG7EBkSdEeOSoZE-lX0B5Q" value="1"/>
         </ownedEnd>
       </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_1Khh8EWXEeOSoZE-lX0B5Q" name="take_place_in" memberEnd="_1Khh8UWXEeOSoZE-lX0B5Q _1Khh9EWXEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_1Khh8UWXEeOSoZE-lX0B5Q" name="talk" type="_D_pvkESaEeOSoZE-lX0B5Q" association="_1Khh8EWXEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1Khh8kWXEeOSoZE-lX0B5Q" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1Khh80WXEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_1Khh9EWXEeOSoZE-lX0B5Q" name="room" type="_C2ZBcESaEeOSoZE-lX0B5Q" association="_1Khh8EWXEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1Khh9UWXEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1Khh9kWXEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
     </packagedElement>
-    <packagedElement xmi:type="uml:Package" xmi:id="_v0vPEESREeOSoZE-lX0B5Q" name="Components"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_v0vPEESREeOSoZE-lX0B5Q" name="Components">
+      <packagedElement xmi:type="uml:Component" xmi:id="_YhXeQEWZEeOSoZE-lX0B5Q">
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_dDC5sEWZEeOSoZE-lX0B5Q" name="pac-conference-conference.jar" clientDependency="_3nFKUEWfEeOSoZE-lX0B5Q _Renr4EWnEeOSoZE-lX0B5Q">
+          <realization xmi:id="_3nFKUEWfEeOSoZE-lX0B5Q" name="ComponentRealization1" supplier="_nFf2EEWZEeOSoZE-lX0B5Q" client="_dDC5sEWZEeOSoZE-lX0B5Q" realizingClassifier="_nFf2EEWZEeOSoZE-lX0B5Q"/>
+        </nestedClassifier>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_nFf2EEWZEeOSoZE-lX0B5Q" name="pac-conference-conference-impl.jar" clientDependency="_LOHhsEWoEeOSoZE-lX0B5Q"/>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_1ElxsEWaEeOSoZE-lX0B5Q" name="pac-conference-talk.jar" clientDependency="_4FyfkEWfEeOSoZE-lX0B5Q _TtjooEWnEeOSoZE-lX0B5Q _o38iwEWnEeOSoZE-lX0B5Q">
+          <realization xmi:id="_4FyfkEWfEeOSoZE-lX0B5Q" name="ComponentRealization1" supplier="_4Ve6sEWaEeOSoZE-lX0B5Q" client="_1ElxsEWaEeOSoZE-lX0B5Q" realizingClassifier="_4Ve6sEWaEeOSoZE-lX0B5Q"/>
+        </nestedClassifier>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_4Ve6sEWaEeOSoZE-lX0B5Q" name="pac-conference-talk-impl.jar" clientDependency="_KD8NkEWoEeOSoZE-lX0B5Q _Q99ZYEWoEeOSoZE-lX0B5Q"/>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_73MjYEWZEeOSoZE-lX0B5Q" name="pac-conference-location.jar" clientDependency="_2a5rEEWfEeOSoZE-lX0B5Q">
+          <realization xmi:id="_2a5rEEWfEeOSoZE-lX0B5Q" name="ComponentRealization1" supplier="__qRMYEWZEeOSoZE-lX0B5Q" client="_73MjYEWZEeOSoZE-lX0B5Q" realizingClassifier="__qRMYEWZEeOSoZE-lX0B5Q"/>
+        </nestedClassifier>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="__qRMYEWZEeOSoZE-lX0B5Q" name="pac-conference-location-impl.jar" clientDependency="_KyZ2EEWoEeOSoZE-lX0B5Q"/>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_fahcgEWbEeOSoZE-lX0B5Q" name="pac-conference-web.war" clientDependency="_VV-igEWoEeOSoZE-lX0B5Q _VxkSUEWoEeOSoZE-lX0B5Q _Wqh6oEWoEeOSoZE-lX0B5Q _XEItcEWoEeOSoZE-lX0B5Q"/>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_VzaNwEWaEeOSoZE-lX0B5Q" name="pac-conference-speaker.jar" clientDependency="_3BSVoEWfEeOSoZE-lX0B5Q">
+          <realization xmi:id="_3BSVoEWfEeOSoZE-lX0B5Q" name="ComponentRealization1" supplier="_VMR8UEWaEeOSoZE-lX0B5Q" client="_VzaNwEWaEeOSoZE-lX0B5Q" realizingClassifier="_VMR8UEWaEeOSoZE-lX0B5Q"/>
+        </nestedClassifier>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_VMR8UEWaEeOSoZE-lX0B5Q" name="pac-conference-speaker-impl.jar" clientDependency="_MhnJ4EWoEeOSoZE-lX0B5Q"/>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_pD-DAEWbEeOSoZE-lX0B5Q" name="pac-conference-rest.jar" clientDependency="_XoQHIEWoEeOSoZE-lX0B5Q _X59iMEWoEeOSoZE-lX0B5Q _YJ5boEWoEeOSoZE-lX0B5Q _YYssoEWoEeOSoZE-lX0B5Q"/>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_pYvjsEWcEeOSoZE-lX0B5Q" name="pac-conference-rest-impl.jar" clientDependency="_pM0gMEWfEeOSoZE-lX0B5Q">
+          <realization xmi:id="_pM0gMEWfEeOSoZE-lX0B5Q" name="ComponentRealization1" supplier="_pD-DAEWbEeOSoZE-lX0B5Q" client="_pYvjsEWcEeOSoZE-lX0B5Q" realizingClassifier="_pD-DAEWbEeOSoZE-lX0B5Q"/>
+        </nestedClassifier>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_mSCs8EWmEeOSoZE-lX0B5Q" name="pac-conference-monitoring.jar" clientDependency="_xmGbIEWmEeOSoZE-lX0B5Q">
+          <realization xmi:id="_xmGbIEWmEeOSoZE-lX0B5Q" name="ComponentRealization1" supplier="_rkpPAEWmEeOSoZE-lX0B5Q" client="_mSCs8EWmEeOSoZE-lX0B5Q" realizingClassifier="_rkpPAEWmEeOSoZE-lX0B5Q"/>
+        </nestedClassifier>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_rkpPAEWmEeOSoZE-lX0B5Q" name="pac-conference-monitoring-impl.jar"/>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_0Qtx0EWnEeOSoZE-lX0B5Q" name="pac-conference-notification.jar" clientDependency="_HXX5oEWoEeOSoZE-lX0B5Q">
+          <realization xmi:id="_HXX5oEWoEeOSoZE-lX0B5Q" name="ComponentRealization1" supplier="_CvVXgEWoEeOSoZE-lX0B5Q" client="_0Qtx0EWnEeOSoZE-lX0B5Q" realizingClassifier="_CvVXgEWoEeOSoZE-lX0B5Q"/>
+        </nestedClassifier>
+        <nestedClassifier xmi:type="uml:Component" xmi:id="_CvVXgEWoEeOSoZE-lX0B5Q" name="pac-conference-notification-impl.jar"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_Renr4EWnEeOSoZE-lX0B5Q" name="Dependency1" supplier="_73MjYEWZEeOSoZE-lX0B5Q" client="_dDC5sEWZEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_TtjooEWnEeOSoZE-lX0B5Q" name="Dependency2" supplier="_dDC5sEWZEeOSoZE-lX0B5Q" client="_1ElxsEWaEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_o38iwEWnEeOSoZE-lX0B5Q" name="Dependency3" supplier="_VzaNwEWaEeOSoZE-lX0B5Q" client="_1ElxsEWaEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_KD8NkEWoEeOSoZE-lX0B5Q" name="Dependency4" supplier="_0Qtx0EWnEeOSoZE-lX0B5Q" client="_4Ve6sEWaEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_KyZ2EEWoEeOSoZE-lX0B5Q" name="Dependency5" supplier="_mSCs8EWmEeOSoZE-lX0B5Q" client="__qRMYEWZEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_LOHhsEWoEeOSoZE-lX0B5Q" name="Dependency6" supplier="_mSCs8EWmEeOSoZE-lX0B5Q" client="_nFf2EEWZEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_MhnJ4EWoEeOSoZE-lX0B5Q" name="Dependency8" supplier="_mSCs8EWmEeOSoZE-lX0B5Q" client="_VMR8UEWaEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_Q99ZYEWoEeOSoZE-lX0B5Q" name="Dependency7" supplier="_mSCs8EWmEeOSoZE-lX0B5Q" client="_4Ve6sEWaEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_VV-igEWoEeOSoZE-lX0B5Q" name="Dependency9" supplier="_73MjYEWZEeOSoZE-lX0B5Q" client="_fahcgEWbEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_VxkSUEWoEeOSoZE-lX0B5Q" name="Dependency10" supplier="_dDC5sEWZEeOSoZE-lX0B5Q" client="_fahcgEWbEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_Wqh6oEWoEeOSoZE-lX0B5Q" name="Dependency11" supplier="_1ElxsEWaEeOSoZE-lX0B5Q" client="_fahcgEWbEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_XEItcEWoEeOSoZE-lX0B5Q" name="Dependency12" supplier="_VzaNwEWaEeOSoZE-lX0B5Q" client="_fahcgEWbEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_XoQHIEWoEeOSoZE-lX0B5Q" name="Dependency13" supplier="_73MjYEWZEeOSoZE-lX0B5Q" client="_pD-DAEWbEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_X59iMEWoEeOSoZE-lX0B5Q" name="Dependency14" supplier="_dDC5sEWZEeOSoZE-lX0B5Q" client="_pD-DAEWbEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_YJ5boEWoEeOSoZE-lX0B5Q" name="Dependency15" supplier="_1ElxsEWaEeOSoZE-lX0B5Q" client="_pD-DAEWbEeOSoZE-lX0B5Q"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_YYssoEWoEeOSoZE-lX0B5Q" name="Dependency16" supplier="_VzaNwEWaEeOSoZE-lX0B5Q" client="_pD-DAEWbEeOSoZE-lX0B5Q"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_z3hA8EWiEeOSoZE-lX0B5Q" name="Deployment">
+      <packagedElement xmi:type="uml:Artifact" xmi:id="_-DS4cEWiEeOSoZE-lX0B5Q" name="pac-conference.ear">
+        <nestedArtifact xmi:id="_Da7rgEWjEeOSoZE-lX0B5Q" name="pac-conference-conference.jar"/>
+        <nestedArtifact xmi:id="_IXGqkEWjEeOSoZE-lX0B5Q" name="pac-conference-conference-impl.jar"/>
+        <nestedArtifact xmi:id="_QLTmsEWjEeOSoZE-lX0B5Q" name="pac-conference-location.jar"/>
+        <nestedArtifact xmi:id="_T6zXQEWjEeOSoZE-lX0B5Q" name="pac-conference-location-impl.jar"/>
+        <nestedArtifact xmi:id="_ZImR0EWjEeOSoZE-lX0B5Q" name="pac-conference-talk.jar"/>
+        <nestedArtifact xmi:id="_da4mYEWjEeOSoZE-lX0B5Q" name="pac-conference-talk-impl.jar"/>
+        <nestedArtifact xmi:id="_jRcKEEWjEeOSoZE-lX0B5Q" name="pac-conference-speaker.jar"/>
+        <nestedArtifact xmi:id="_mi7wAEWjEeOSoZE-lX0B5Q" name="pac-conference-speaker-impl.jar"/>
+        <nestedArtifact xmi:id="_xg88wEWjEeOSoZE-lX0B5Q" name="pac-conference-web.war"/>
+        <nestedArtifact xmi:id="_3XDNcEWjEeOSoZE-lX0B5Q" name="pac-conference-rest.war">
+          <nestedArtifact xmi:id="_5YMl0EWjEeOSoZE-lX0B5Q" name="pac-conference-rest.jar"/>
+          <nestedArtifact xmi:id="_-CcHYEWjEeOSoZE-lX0B5Q" name="pac-conference-rest-impl.jar"/>
+        </nestedArtifact>
+        <nestedArtifact xmi:id="_Lf1goEWkEeOSoZE-lX0B5Q" name="pac-conference-performance.jar"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Device" xmi:id="_jCLJkEWkEeOSoZE-lX0B5Q" name="server1">
+        <nestedClassifier xmi:type="uml:ExecutionEnvironment" xmi:id="_mWpyEEWkEeOSoZE-lX0B5Q" name="JBoss 7" clientDependency="_vvdUgEWkEeOSoZE-lX0B5Q">
+          <deployment xmi:id="_vvdUgEWkEeOSoZE-lX0B5Q" name="Deployment1" supplier="_-DS4cEWiEeOSoZE-lX0B5Q" client="_mWpyEEWkEeOSoZE-lX0B5Q" deployedArtifact="_-DS4cEWiEeOSoZE-lX0B5Q">
+            <configuration xmi:id="_wuFf8EWkEeOSoZE-lX0B5Q" name="application.xml"/>
+          </deployment>
+        </nestedClassifier>
+        <nestedClassifier xmi:type="uml:ExecutionEnvironment" xmi:id="_oyvaAEWkEeOSoZE-lX0B5Q" name="MySQL" clientDependency="_3DrwEEWkEeOSoZE-lX0B5Q">
+          <deployment xmi:id="_3DrwEEWkEeOSoZE-lX0B5Q" name="Deployment1" supplier="_0dWnAEWkEeOSoZE-lX0B5Q" client="_oyvaAEWkEeOSoZE-lX0B5Q" deployedArtifact="_0dWnAEWkEeOSoZE-lX0B5Q"/>
+        </nestedClassifier>
+      </packagedElement>
+      <packagedElement xmi:type="uml:CommunicationPath" xmi:id="_rDn3gEWkEeOSoZE-lX0B5Q" name="JDBC" memberEnd="_rDpssEWkEeOSoZE-lX0B5Q _rDqTwEWkEeOSoZE-lX0B5Q">
+        <ownedEnd xmi:id="_rDpssEWkEeOSoZE-lX0B5Q" name="source" type="_mWpyEEWkEeOSoZE-lX0B5Q" association="_rDn3gEWkEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rDpssUWkEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rDpsskWkEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_rDqTwEWkEeOSoZE-lX0B5Q" name="target" type="_oyvaAEWkEeOSoZE-lX0B5Q" association="_rDn3gEWkEeOSoZE-lX0B5Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rDqTwUWkEeOSoZE-lX0B5Q" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rDqTwkWkEeOSoZE-lX0B5Q" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Artifact" xmi:id="_0dWnAEWkEeOSoZE-lX0B5Q" name="pac-conference.sql"/>
+    </packagedElement>
   </packagedElement>
 </uml:Model>
