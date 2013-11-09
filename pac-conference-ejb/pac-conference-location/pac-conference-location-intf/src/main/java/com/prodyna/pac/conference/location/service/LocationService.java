@@ -3,8 +3,6 @@
  */
 package com.prodyna.pac.conference.location.service;
 
-import javax.ejb.Stateless;
-
 import com.prodyna.pac.conference.location.model.Location;
 
 /**
@@ -14,7 +12,6 @@ import com.prodyna.pac.conference.location.model.Location;
  * 
  */
 
-@Stateless
 public interface LocationService {
 
 	/**
