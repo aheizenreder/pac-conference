@@ -28,7 +28,7 @@ create table location_location
 create table location_room
 (
 	location_id bigint not null,
-	id integer not null auto_increment,
+	id bigint not null auto_increment,
 	name varchar(50) not null,
 	description varchar(256),
 	capacity integer not null,
