@@ -35,7 +35,8 @@
         <module>pac-conference-web</module>
         <module>pac-conference-ear</module>
     <module>pac-conference-rest</module>
-  </modules>
+    <module>pac-conference-test</module>
+    </modules>
 
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
@@ -80,12 +81,6 @@
 
             <!-- Define the version of the EJB jar so that we don't need 
                 to repeat ourselves in every module -->
-            <dependency>
-                <groupId>com.prodyna.pac.conference</groupId>
-                <artifactId>pac-conference-ejb</artifactId>
-                <version>${project.version}</version>
-                <type>ejb</type>
-            </dependency>
             
             <!-- Define the version of the WAR so that we don't need to repeat 
                 ourselves in every module -->
@@ -121,6 +116,38 @@
                 <scope>import</scope>
             </dependency>
 
+            <dependency>
+            	<groupId>com.prodyna.pac.conference</groupId>
+            	<artifactId>pac-conference-conference-impl</artifactId>
+            	<version>${project.version}</version>
+            </dependency>
+            <dependency>
+            	<groupId>com.prodyna.pac.conference</groupId>
+            	<artifactId>pac-conference-conference-intf</artifactId>
+            	<version>${project.version}</version>
+            </dependency>
+            <dependency>
+            	<groupId>com.prodyna.pac.conference</groupId>
+            	<artifactId>pac-conference-example-ejb</artifactId>
+            	<version>${project.version}</version>
+            	<type>ejb</type>
+            </dependency>
+            <dependency>
+            	<groupId>com.prodyna.pac.conference</groupId>
+            	<artifactId>pac-conference-persistence</artifactId>
+            	<version>${project.version}</version>
+            	<type>ejb</type>
+            </dependency>
+            <dependency>
+            	<groupId>com.prodyna.pac.conference</groupId>
+            	<artifactId>pac-conference-location-intf</artifactId>
+            	<version>${project.version}</version>
+            </dependency>
+            <dependency>
+            	<groupId>com.prodyna.pac.conference</groupId>
+            	<artifactId>pac-conference-location-impl</artifactId>
+            	<version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
