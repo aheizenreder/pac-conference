@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Min;
@@ -17,11 +18,14 @@ import javax.validation.constraints.Size;
  * Entity Room represents a room in a conference location.
  * 
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
- *
+ * 
  */
 @Entity
-@Table(name="location_room", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
+@NamedQuery(name = Room.FIND_ROOMS_FOR_LOCATION, query = "SELECT r FROM Room r WHERE r.location.id = :locationId")
+@Table(name = "location_room", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
 public class Room implements Serializable {
+
+	public static final String FIND_ROOMS_FOR_LOCATION = "findRoomsForLocation";
 
 	/**
 	 * 
@@ -31,37 +35,39 @@ public class Room implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@NotNull
 	@Size(min = 1, max = 50)
 	private String name;
-	
+
 	private String description;
-	
+
 	@NotNull
-	@Min(value=1)
-	private Long capacity;
+	@Min(value = 1)
+	private Integer capacity;
 
 	@ManyToOne
-	@JoinColumn(name="location_id", referencedColumnName="id")
+	@JoinColumn(name = "location_id", referencedColumnName = "id")
 	private Location location;
-	
+
 	public Room() {
 		super();
 	}
-	
-	public Room(Location location, String name, String description, Long capacity){
+
+	public Room(Location location, String name, String description,
+			Integer capacity) {
 		super();
-		
+
 		this.location = location;
 		this.name = name;
 		this.description = description;
 		this.capacity = capacity;
 	}
-	
-	public Room(Location location, Long id, String name, String description, Long capacity){
+
+	public Room(Location location, Long id, String name, String description,
+			Integer capacity) {
 		super();
-		
+
 		this.location = location;
 		this.id = id;
 		this.name = name;
@@ -77,7 +83,8 @@ public class Room implements Serializable {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(Long id) {
 		this.id = id;
@@ -91,7 +98,8 @@ public class Room implements Serializable {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -105,7 +113,8 @@ public class Room implements Serializable {
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param description
+	 *            the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -114,14 +123,15 @@ public class Room implements Serializable {
 	/**
 	 * @return the capacity
 	 */
-	public Long getCapacity() {
+	public Integer getCapacity() {
 		return capacity;
 	}
 
 	/**
-	 * @param capacity the capacity to set
+	 * @param capacity
+	 *            the capacity to set
 	 */
-	public void setCapacity(Long capacity) {
+	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
 	}
 
@@ -133,10 +143,11 @@ public class Room implements Serializable {
 	}
 
 	/**
-	 * @param location the location to set
+	 * @param location
+	 *            the location to set
 	 */
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-   
+
 }
