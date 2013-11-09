@@ -3,6 +3,7 @@
  */
 package com.prodyna.pac.conference.location.service;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
@@ -16,6 +17,7 @@ import com.prodyna.pac.conference.location.model.Location;
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
  *
  */
+@Stateless
 public class LocationServiceImpl implements LocationService {
 
 	@Inject
