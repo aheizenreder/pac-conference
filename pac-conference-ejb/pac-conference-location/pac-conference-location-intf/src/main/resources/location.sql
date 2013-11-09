@@ -11,7 +11,7 @@ use pac_conference;
 -- location table
 create table location_location
 (
-	id integer not null auto_increment,
+	id bigint not null auto_increment,
 	name varchar (50) not null,
 	description varchar(256),
 	street varchar (50) not null,
@@ -27,7 +27,7 @@ create table location_location
 -- room table
 create table location_room
 (
-	location_id integer not null,
+	location_id bigint not null,
 	id integer not null auto_increment,
 	name varchar(50) not null,
 	description varchar(256),
