@@ -17,6 +17,11 @@
    <dependencies>
 
       <!-- Dependency on the EJB module so we can use it's services if needed -->
+      <dependency>
+      	<groupId>com.prodyna.pac.conference</groupId>
+      	<artifactId>pac-conference-location-intf</artifactId>
+      	<scope>provided</scope>
+      </dependency>
    </dependencies>
 
    <build>
