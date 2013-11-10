@@ -26,6 +26,7 @@ import javax.validation.constraints.Size;
 public class Room implements Serializable {
 
 	public static final String FIND_ROOMS_FOR_LOCATION = "findRoomsForLocation";
+	public static final String FIND_ROOMS_FOR_LOCATION_PARAM_NAME_LOCATION_ID = "locationId";
 
 	/**
 	 * 
