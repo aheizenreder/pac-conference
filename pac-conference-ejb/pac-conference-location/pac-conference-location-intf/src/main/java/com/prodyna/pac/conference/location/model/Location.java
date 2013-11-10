@@ -264,4 +264,112 @@ public class Location implements Serializable {
 		this.id = id;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result
+				+ ((houseNumber == null) ? 0 : houseNumber.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((postalcode == null) ? 0 : postalcode.hashCode());
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Location)) {
+			return false;
+		}
+		Location other = (Location) obj;
+		if (city == null) {
+			if (other.city != null) {
+				return false;
+			}
+		} else if (!city.equals(other.city)) {
+			return false;
+		}
+		if (country == null) {
+			if (other.country != null) {
+				return false;
+			}
+		} else if (!country.equals(other.country)) {
+			return false;
+		}
+		if (description == null) {
+			if (other.description != null) {
+				return false;
+			}
+		} else if (!description.equals(other.description)) {
+			return false;
+		}
+		if (houseNumber == null) {
+			if (other.houseNumber != null) {
+				return false;
+			}
+		} else if (!houseNumber.equals(other.houseNumber)) {
+			return false;
+		}
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
+			return false;
+		}
+		if (postalcode == null) {
+			if (other.postalcode != null) {
+				return false;
+			}
+		} else if (!postalcode.equals(other.postalcode)) {
+			return false;
+		}
+		if (street == null) {
+			if (other.street != null) {
+				return false;
+			}
+		} else if (!street.equals(other.street)) {
+			return false;
+		}
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Location [id=" + id + ", name=" + name + ", description="
+				+ description + ", street=" + street + ", houseNumber="
+				+ houseNumber + ", city=" + city + ", postalcode=" + postalcode
+				+ ", country=" + country + "]";
+	}
+
+	
+	
 }
