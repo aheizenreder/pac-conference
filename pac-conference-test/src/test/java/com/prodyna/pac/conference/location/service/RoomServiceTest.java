@@ -5,6 +5,8 @@ package com.prodyna.pac.conference.location.service;
 
 import static org.junit.Assert.fail;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -95,7 +97,8 @@ public class RoomServiceTest {
 
 		log.info("location for tests created with id " + location.getId() + ".");
 
-		room = new Room(location, "778", "Test room for create test.", 10);
+		room = new Room(location, "778", "Test room for create test.",
+				Integer.valueOf(10));
 	}
 
 	/**
@@ -172,7 +175,31 @@ public class RoomServiceTest {
 	 */
 	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
+		log.info("test update room ...");
+
+		String newName = "New room name";
+		String newDescription = "New description";
+		Integer newCapacity = 20;
+
+		initTest();
+		roomService.create(room);
+		log.info("update room with new values ...");
+		room.setName(newName);
+		room.setDescription(newDescription);
+		room.setCapacity(newCapacity);
+
+		roomService.update(room);
+		log.info("read room after update ...");
+		Room aUp = roomService.get(room.getId());
+
+		cleanUpTest();
+
+		Assert.assertNotNull(aUp.getId());
+		Assert.assertEquals(newName, aUp.getName());
+		Assert.assertEquals(newDescription, aUp.getDescription());
+		Assert.assertEquals(newCapacity, aUp.getCapacity());
+
+		log.info("END testUpdate().");
 	}
 
 	/**
@@ -182,7 +209,23 @@ public class RoomServiceTest {
 	 */
 	@Test
 	public void testDelete() {
-		fail("Not yet implemented");
+		log.info("test delete room ...");
+		initTest();
+		roomService.create(room);
+
+		Long roomId = room.getId();
+
+		Assert.assertNotNull(roomId);
+
+		log.info("delete room with id " + roomId);
+
+		roomService.delete(room);
+
+		log.info("try to get deleted room with id " + roomId);
+		Room deleted = roomService.get(roomId);
+		Assert.assertNull(deleted);
+
+		log.info("END testDelete().");
 	}
 
 	/**
@@ -192,7 +235,51 @@ public class RoomServiceTest {
 	 */
 	@Test
 	public void testFindRoomByLocation() {
-		fail("Not yet implemented");
+		log.info("test find room by location ...");
+		initTest();
+		// a location is created an a room initialized
+		roomService.create(room);
+		Assert.assertNotNull(room.getId());
+
+		// create more rooms
+		Room room2 = new Room(location, "Room2",
+				"Room2 for find by location test", 100);
+		roomService.create(room2);
+		Assert.assertNotNull(room2.getId());
+
+		Room room3 = new Room(location, "Room3",
+				"Room3 for find by location test", 100);
+		roomService.create(room3);
+		Assert.assertNotNull(room3.getId());
+
+		Room room4 = new Room(location, "Room4",
+				"Room4 for find by location test", 100);
+		roomService.create(room4);
+		Assert.assertNotNull(room4.getId());
+
+		log.info("try to get rooms by location with id " + location.getId());
+		List<Room> roomByLocationList = roomService
+				.findRoomByLocation(location);
+		Assert.assertNotNull(roomByLocationList);
+		log.info("number of rooms in location " + roomByLocationList.size());
+		Assert.assertEquals(4, roomByLocationList.size());
+
+		log.info("remove a room with id " + room2.getId());
+		roomService.delete(room2);
+
+		roomByLocationList = roomService.findRoomByLocation(location);
+		Assert.assertNotNull(roomByLocationList);
+		log.info("number of rooms in location " + roomByLocationList.size());
+		Assert.assertEquals(3, roomByLocationList.size());
+
+		for (Room rm : roomByLocationList) {
+			if (rm.getId() != room.getId()) {
+				// delete only in this test added rooms
+				roomService.delete(rm);
+			}
+		}
+		cleanUpTest();
+		log.info("END testFindRoomByLocation().");
 	}
 
 }
