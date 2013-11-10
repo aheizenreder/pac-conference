@@ -37,7 +37,7 @@ public class RoomServiceImpl implements RoomService {
 	public Room create(Room room) {
 		log.info("Create new room "+room.getName()+" ...");
 		em.persist(room);
-		log.info("Room "+room.getName()+"persisted with id "+room.getDescription());
+		log.info("Room "+room.getName()+" persisted with id "+room.getDescription());
 		
 		return room;
 	}
@@ -90,7 +90,7 @@ public class RoomServiceImpl implements RoomService {
 		
 		Long locationId = location.getId();
 		Query findRoomByLocationQuery = em.createNamedQuery(Room.FIND_ROOMS_FOR_LOCATION);
-		findRoomByLocationQuery.setParameter("locationID", locationId);
+		findRoomByLocationQuery.setParameter(Room.FIND_ROOMS_FOR_LOCATION_PARAM_NAME_LOCATION_ID, locationId);
 		List<Room> resultList = (List<Room>) findRoomByLocationQuery.getResultList();
 		if ( resultList != null){
 			log.info("there are "+resultList.size()+" rooms found.");
