@@ -3,6 +3,8 @@
  */
 package com.prodyna.pac.conference.location.service;
 
+import java.util.List;
+
 import com.prodyna.pac.conference.location.model.Location;
 
 /**
@@ -38,21 +40,28 @@ public interface LocationService {
 	 */
 	public Location get(Long id);
 
-	
+	/**
+	 * return all Locations instances as a list.
+	 * 
+	 * @return a List with all instances of locations.
+	 */
+	public List<Location> getAll();
+
 	/**
 	 * update a location instance.
 	 * 
-	 * @param location a Location instance with updated values.
+	 * @param location
+	 *            a Location instance with updated values.
 	 * 
 	 * @return the updated version of Location.
 	 */
 	public Location update(Location location);
 
-	
 	/**
 	 * deletes the given Location from database.
 	 * 
-	 * @param location Location instance to delete.
+	 * @param location
+	 *            Location instance to delete.
 	 * 
 	 * @return the same Location instance which was removed from database.
 	 */

@@ -41,7 +41,7 @@ public class LocationServiceTest {
 
 	@Inject
 	private LocationService locationService;
-	
+
 	@Deployment
 	public static Archive<?> createDeployment() {
 
@@ -194,9 +194,9 @@ public class LocationServiceTest {
 		loc.setCity(newCity);
 		loc.setPostalcode(newPostalcode);
 		loc.setCountry(newCountry);
-		
+
 		Location update = locationService.update(loc);
-		
+
 		Assert.assertEquals(update.getName(), newName);
 		Assert.assertEquals(update.getDescription(), newDescritpion);
 		Assert.assertEquals(update.getStreet(), newStreet);
@@ -205,7 +205,6 @@ public class LocationServiceTest {
 		Assert.assertEquals(update.getPostalcode(), newPostalcode);
 		Assert.assertEquals(update.getCountry(), newCountry);
 
-		
 		log.info("END testUpdate().");
 
 	}
@@ -218,14 +217,57 @@ public class LocationServiceTest {
 				"Location for delete test", "delete street", "1234c",
 				"Delete city", "12345", "Delete country");
 		Location delete = locationService.create(loc);
-		
+
 		Assert.assertNotNull(delete.getId());
 		Location deleted = locationService.delete(delete);
-		
+
 		// try to get the deleted location
 		Location test = locationService.get(deleted.getId());
-		
+
 		Assert.assertNull(test);
 		log.info("END testDelete().");
+	}
+
+	@Test
+	@InSequence(value = 7)
+	public void testGetAll() {
+		log.info("test select all locations ...");
+
+		String locationName = "Location";
+		String locationDescription = "A description for Location";
+		String locationStreet = "Teststreet";
+		String locationHousenumber = "123a";
+		String locationCity = "Testcity";
+		String locationPostalcode = "1234";
+		List<Location> testLoctionList = new ArrayList<Location>();
+
+		List<Location> existingLocationsList = locationService.getAll();
+		int numExistingLocations = existingLocationsList.size();
+
+		int numOfLocations = 5;
+
+		for (int i = 1; i <= 5; i++) {
+			log.info("add test locaiton " + i);
+			Location testLocation = new Location(locationName + i,
+					locationDescription + 1, locationStreet + i,
+					locationHousenumber, locationCity + i, locationPostalcode
+							+ i, null);
+			locationService.create(testLocation);
+			Assert.assertNotNull(testLocation.getId());
+			testLoctionList.add(testLocation);
+		}
+
+		log.info("select all locations ...");
+		List<Location> allLocationsList = locationService.getAll();
+		Assert.assertEquals(numOfLocations + numExistingLocations,
+				allLocationsList.size());
+
+		log.info("delete all created locations ...");
+		for (Location loc : testLoctionList) {
+			locationService.delete(loc);
+		}
+
+		allLocationsList = locationService.getAll();
+		Assert.assertEquals(numExistingLocations, allLocationsList.size());
 	}
 }

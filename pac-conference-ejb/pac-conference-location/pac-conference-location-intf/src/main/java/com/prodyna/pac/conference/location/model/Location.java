@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -19,7 +21,10 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "location_location", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
+@NamedQueries(@NamedQuery(name = Location.SELECT_ALL_LOCATIONS, query = "SELECT l FROM Location l"))
 public class Location implements Serializable {
+
+	public static final String SELECT_ALL_LOCATIONS = "selectAllLocations";
 
 	/**
 	 * 
@@ -101,7 +106,7 @@ public class Location implements Serializable {
 	public Location(Long id, String name, String description, String street,
 			String houseNumber, String city, String postalcode, String country) {
 		super();
-		
+
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -264,7 +269,9 @@ public class Location implements Serializable {
 		this.id = id;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -285,7 +292,9 @@ public class Location implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -359,7 +368,9 @@ public class Location implements Serializable {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -370,6 +381,4 @@ public class Location implements Serializable {
 				+ ", country=" + country + "]";
 	}
 
-	
-	
 }
