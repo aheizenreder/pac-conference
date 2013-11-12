@@ -3,8 +3,6 @@
  */
 package com.prodyna.pac.conference.conference.service;
 
-import static org.junit.Assert.fail;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -286,7 +284,25 @@ public class ConferenceServiceTest {
 	 */
 	@Test
 	public void testDelete() {
-		fail("Not yet implemented");
+		log.info("test delete conference ...");
+
+		log.info("create new conference for update test ...");
+		Conference conference = new Conference("TestDelete Conference",
+				"Description for TestDelete Conference", startDate, endDate,
+				location1);
+		conferenceService.create(conference);
+		Assert.assertNotNull(conference.getId());
+
+		Long deletedId = conference.getId();
+
+		log.info("delete created conference with id " + deletedId + " ...");
+		conferenceService.delete(conference);
+
+		log.info("try to get the conference with id from deleted conference ...");
+		Conference deleted = conferenceService.get(deletedId);
+		Assert.assertNull(deleted);
+
+		log.info("END testDelete().");
 	}
 
 	/**
@@ -296,17 +312,70 @@ public class ConferenceServiceTest {
 	 */
 	@Test
 	public void testFindConferenceByLocation() {
-		fail("Not yet implemented");
+		log.info("test get conferences by location ...");
+
+		List<Conference> conferencesLocationList = conferenceService
+				.findConferenceByLocation(location1);
+		Assert.assertNotNull(conferencesLocationList);
+		int numConf = conferencesLocationList.size();
+
+		log.info("create new conference for find by Location test ...");
+		Conference conference = new Conference("Test Conference",
+				"Description for Test Conference", startDate, endDate,
+				location1);
+		conferenceService.create(conference);
+		Assert.assertNotNull(conference.getId());
+
+		log.info("get all conferences for location " + location1.getName());
+		List<Conference> updatedList = conferenceService
+				.findConferenceByLocation(location1);
+		Assert.assertNotNull(updatedList);
+		Assert.assertEquals(numConf + 1, updatedList.size());
+
+		conferenceService.delete(conference);
+
+		log.info("END testFindConferenceByLocation().");
 	}
 
 	/**
 	 * Test method for
-	 * {@link com.prodyna.pac.conference.conference.service.ConferenceService#findConferencesStartedStartedAfterDate(java.util.Date)}
+	 * {@link com.prodyna.pac.conference.conference.service.ConferenceService#findConferencesStartedAfterDate(java.util.Date)}
 	 * .
 	 */
 	@Test
-	public void testFindConferencesStartedStartedAfterDate() {
-		fail("Not yet implemented");
+	public void testFindConferencesStartedAfterDate() {
+		log.info("test find conferences by start date ...");
+
+		List<Conference> existList = conferenceService
+				.findConferencesStartedAfterDate(startDate);
+		Assert.assertNotNull(existList);
+		int numExistList = existList.size();
+
+		List<Conference> existAfterEndDateList = conferenceService
+				.findConferencesStartedAfterDate(endDate);
+		Assert.assertNotNull(existAfterEndDateList);
+		int numExistAfterEndDate = existAfterEndDateList.size();
+
+		log.info("create new conference for find test ...");
+		Conference conference = new Conference("Test Conference",
+				"Description for Test Conference", startDate, endDate,
+				location1);
+		conferenceService.create(conference);
+		Assert.assertNotNull(conference.getId());
+
+		List<Conference> newList = conferenceService
+				.findConferencesStartedAfterDate(startDate);
+		Assert.assertNotNull(newList);
+		Assert.assertEquals(numExistList + 1, newList.size());
+
+		List<Conference> newListAfterEndDate = conferenceService
+				.findConferencesStartedAfterDate(endDate);
+		Assert.assertNotNull(newListAfterEndDate);
+		Assert.assertEquals(numExistAfterEndDate, newListAfterEndDate.size());
+
+		conferenceService.delete(conference);
+
+		log.info("END testFindConferencesStartedAfterDate().");
 	}
 
 	/**
@@ -316,7 +385,47 @@ public class ConferenceServiceTest {
 	 */
 	@Test
 	public void testFindConferencesByStartDateLocation() {
-		fail("Not yet implemented");
+		log.info("test find conferences by start date and location ...");
+
+		List<Conference> existList = conferenceService
+				.findConferencesByStartDateLocation(location1, startDate);
+		Assert.assertNotNull(existList);
+		int numExistList = existList.size();
+
+		List<Conference> existListLocation2 = conferenceService
+				.findConferencesByStartDateLocation(location2, startDate);
+		Assert.assertNotNull(existListLocation2);
+		int numExistLocation2List = existListLocation2.size();
+
+		List<Conference> existAfterEndDateList = conferenceService
+				.findConferencesByStartDateLocation(location1, endDate);
+		Assert.assertNotNull(existAfterEndDateList);
+		int numExistAfterEndDate = existAfterEndDateList.size();
+
+		log.info("create new conference for find test ...");
+		Conference conference = new Conference("Test Conference",
+				"Description for Test Conference", startDate, endDate,
+				location1);
+		conferenceService.create(conference);
+		Assert.assertNotNull(conference.getId());
+
+		List<Conference> newList = conferenceService
+				.findConferencesByStartDateLocation(location1, startDate);
+		Assert.assertNotNull(newList);
+		Assert.assertEquals(numExistList + 1, newList.size());
+
+		List<Conference> newListAfterEndDate = conferenceService
+				.findConferencesByStartDateLocation(location1, endDate);
+		Assert.assertNotNull(newListAfterEndDate);
+		Assert.assertEquals(numExistAfterEndDate, newListAfterEndDate.size());
+
+		List<Conference> newExistListLocation2 = conferenceService
+				.findConferencesByStartDateLocation(location2, startDate);
+		Assert.assertNotNull(newExistListLocation2);
+		Assert.assertEquals(numExistLocation2List, newExistListLocation2.size());
+
+		conferenceService.delete(conference);
+
 	}
 
 }
