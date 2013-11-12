@@ -41,6 +41,13 @@ public interface RoomService {
 	public Room get(Long id);
 
 	/**
+	 * returns all room instances.
+	 * 
+	 * @return a List with all existing room instances.
+	 */
+	public List<Room> getAll();
+
+	/**
 	 * update a Room instance.
 	 * 
 	 * @param room

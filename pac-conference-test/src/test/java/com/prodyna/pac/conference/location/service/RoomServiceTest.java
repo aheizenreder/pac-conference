@@ -5,6 +5,7 @@ package com.prodyna.pac.conference.location.service;
 
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -282,4 +283,42 @@ public class RoomServiceTest {
 		log.info("END testFindRoomByLocation().");
 	}
 
+	@Test
+	public void testGetAll() {
+		log.info("test select all rooms ...");
+
+		String roomName = "Room";
+		String roomDescription = "A description for Room";
+		Integer roomCapacity = 10;
+
+		List<Room> testRoomList = new ArrayList<Room>();
+
+		List<Room> existingRoomsList = roomService.getAll();
+		int numExistingRooms = existingRoomsList.size();
+
+		int numOfRooms = 5;
+
+		for (int i = 1; i <= numOfRooms; i++) {
+			log.info("add test room " + i);
+			Room testRoom = new Room(location, roomName + i,
+					roomDescription + 1, roomCapacity + i);
+			roomService.create(testRoom);
+			Assert.assertNotNull(testRoom.getId());
+			testRoomList.add(testRoom);
+		}
+
+		log.info("select all rooms ...");
+		List<Room> allRoomList = roomService.getAll();
+		Assert.assertEquals(numOfRooms + numExistingRooms,
+				allRoomList.size());
+
+		log.info("delete all created rooms ...");
+		for (Room rom : testRoomList) {
+			roomService.delete(rom);
+		}
+
+		allRoomList = roomService.getAll();
+		Assert.assertEquals(numExistingRooms, allRoomList.size());
+
+	}
 }

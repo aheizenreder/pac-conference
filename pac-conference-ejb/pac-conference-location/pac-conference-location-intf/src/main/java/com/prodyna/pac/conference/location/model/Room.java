@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -21,10 +22,16 @@ import javax.validation.constraints.Size;
  * 
  */
 @Entity
-@NamedQuery(name = Room.FIND_ROOMS_FOR_LOCATION, query = "SELECT r FROM Room r WHERE r.location.id = :locationId")
+@NamedQueries({
+
+		@NamedQuery(name = Room.SELECT_ALL_ROOMS, query = "SELECT r FROM Room r"),
+		@NamedQuery(name = Room.FIND_ROOMS_FOR_LOCATION, query = "SELECT r FROM Room r WHERE r.location.id = :locationId")
+
+})
 @Table(name = "location_room", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
 public class Room implements Serializable {
 
+	public static final String SELECT_ALL_ROOMS = "selectAllRooms";
 	public static final String FIND_ROOMS_FOR_LOCATION = "findRoomsForLocation";
 	public static final String FIND_ROOMS_FOR_LOCATION_PARAM_NAME_LOCATION_ID = "locationId";
 
@@ -151,7 +158,9 @@ public class Room implements Serializable {
 		this.location = location;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -169,7 +178,9 @@ public class Room implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -222,7 +233,9 @@ public class Room implements Serializable {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -232,5 +245,4 @@ public class Room implements Serializable {
 				+ location + "]";
 	}
 
-	
 }
