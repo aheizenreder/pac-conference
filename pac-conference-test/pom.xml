@@ -79,6 +79,14 @@
         	<groupId>com.prodyna.pac.conference</groupId>
         	<artifactId>pac-conference-cdi</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>com.prodyna.pac.conference</groupId>
+        	<artifactId>pac-conference-conference-intf</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>com.prodyna.pac.conference</groupId>
+        	<artifactId>pac-conference-conference-impl</artifactId>
+        </dependency>
       </dependencies>
   
       <profiles>
