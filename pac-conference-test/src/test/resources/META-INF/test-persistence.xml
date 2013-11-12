@@ -30,7 +30,7 @@
 <!--       <jar-file>pac-conference-location-intf.jar</jar-file> -->
       <properties>
          <!-- Properties for Hibernate -->
-         <property name="hibernate.hbm2ddl.auto" value="create-update" />
+         <property name="hibernate.hbm2ddl.auto" value="update" />
          <property name="hibernate.show_sql" value="false" />
       </properties>
    </persistence-unit>
