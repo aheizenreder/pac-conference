@@ -42,7 +42,7 @@ public class RoomServiceImpl implements RoomService {
 		log.info("Create new room " + room.getName() + " ...");
 		em.persist(room);
 		log.info("Room " + room.getName() + " persisted with id "
-				+ room.getDescription());
+				+ room.getId());
 
 		return room;
 	}
@@ -60,7 +60,7 @@ public class RoomServiceImpl implements RoomService {
 		log.info("Get room by id " + id);
 		room = em.find(Room.class, id);
 		if (room != null) {
-			log.info("Found rootm for id " + id + " room name is "
+			log.info("Found root for id " + id + " room name is "
 					+ room.getName());
 		}
 		return room;
