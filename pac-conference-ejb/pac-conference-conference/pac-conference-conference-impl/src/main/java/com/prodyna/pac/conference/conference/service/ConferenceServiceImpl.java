@@ -147,7 +147,7 @@ public class ConferenceServiceImpl implements ConferenceService {
 	 * @see com.prodyna.pac.conference.conference.service.ConferenceService#findConferencesStartedStartedAfterDate(java.util.Date)
 	 */
 	@Override
-	public List<Conference> findConferencesStartedStartedAfterDate(
+	public List<Conference> findConferencesStartedAfterDate(
 			Date startDate) {
 		log.info("Find all conferences started on or after  " + startDate
 				+ " ...");

@@ -81,7 +81,7 @@ public interface ConferenceService {
 	 * 
 	 * @return a list with all conferences started on or after given start date.
 	 */
-	public List<Conference> findConferencesStartedStartedAfterDate(
+	public List<Conference> findConferencesStartedAfterDate(
 			Date startDate);
 
 	/**
