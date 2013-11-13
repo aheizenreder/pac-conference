@@ -273,12 +273,9 @@ public class RoomServiceTest {
 		log.info("number of rooms in location " + roomByLocationList.size());
 		Assert.assertEquals(3, roomByLocationList.size());
 
-		for (Room rm : roomByLocationList) {
-			if (rm.getId() != room.getId()) {
-				// delete only in this test added rooms
-				roomService.delete(rm);
-			}
-		}
+		roomService.delete(room3);
+		roomService.delete(room4);
+
 		cleanUpTest();
 		log.info("END testFindRoomByLocation().");
 	}
