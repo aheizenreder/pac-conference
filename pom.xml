@@ -67,6 +67,7 @@
 		<version.ejb.plugin>2.3</version.ejb.plugin>
 		<version.surefire.plugin>2.10</version.surefire.plugin>
 		<version.failsafe.plugin>2.16</version.failsafe.plugin>
+		<version.arquillian.openshift>1.0.0.Beta1</version.arquillian.openshift>
 		<version.war.plugin>2.1.1</version.war.plugin>
 
 		<!-- maven-compiler-plugin -->
@@ -150,6 +151,12 @@
 				<groupId>com.prodyna.pac.conference</groupId>
 				<artifactId>pac-conference-cdi</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.container</groupId>
+				<artifactId>arquillian-openshift-express</artifactId>
+				<version>${version.arquillian.openshift}</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
