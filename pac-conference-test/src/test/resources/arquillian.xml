@@ -42,6 +42,7 @@
 			<property name="sshUserName">52837d905973cacb1e00000d</property>
 			<property name="passphrase">Password</property>
 			<property name="login">aheizenreder@prodyna.com</property>
+			<property name="disableStrictHostChecking">true</property>
 		</configuration>
 	</container>
 </arquillian>

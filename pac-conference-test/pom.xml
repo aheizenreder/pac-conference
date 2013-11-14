@@ -91,6 +91,14 @@
 			<groupId>com.prodyna.pac.conference</groupId>
 			<artifactId>pac-conference-conference-impl</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.conference</groupId>
+			<artifactId>pac-conference-speaker-intf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.conference</groupId>
+			<artifactId>pac-conference-speaker-impl</artifactId>
+		</dependency>
 	</dependencies>
 
 	<profiles>

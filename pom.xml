@@ -158,6 +158,16 @@
 				<version>${version.arquillian.openshift}</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.conference</groupId>
+				<artifactId>pac-conference-speaker-intf</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.conference</groupId>
+				<artifactId>pac-conference-speaker-impl</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
