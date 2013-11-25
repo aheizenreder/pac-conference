@@ -54,11 +54,11 @@ public class Conference implements Serializable {
 
 	@NotNull
 	@Column(name = "start_date")
-	Date startDate;
+	private Date startDate;
 
 	@NotNull
 	@Column(name = "end_date")
-	Date endDate;
+	private Date endDate;
 
 	@ManyToOne
 	@JoinColumn(name = "location_id", referencedColumnName = "id")
