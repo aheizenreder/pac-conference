@@ -6,9 +6,7 @@
     <groupId>com.prodyna.pac.conference</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-   <groupId>com.prodyna.pac.conference</groupId>
    <artifactId>pac-conference-talk</artifactId>
-   <version>1.0-SNAPSHOT</version>
    <packaging>pom</packaging>
    <name>pac-conference-talk application</name>
 
