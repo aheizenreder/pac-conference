@@ -78,6 +78,7 @@
 		<dependency>
 			<groupId>com.prodyna.pac.conference</groupId>
 			<artifactId>pac-conference-location-impl</artifactId>
+			<type>ejb</type>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac.conference</groupId>
@@ -90,6 +91,7 @@
 		<dependency>
 			<groupId>com.prodyna.pac.conference</groupId>
 			<artifactId>pac-conference-conference-impl</artifactId>
+			<type>ejb</type>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac.conference</groupId>
@@ -98,6 +100,7 @@
 		<dependency>
 			<groupId>com.prodyna.pac.conference</groupId>
 			<artifactId>pac-conference-speaker-impl</artifactId>
+			<type>ejb</type>
 		</dependency>
 	</dependencies>
 
@@ -154,17 +157,18 @@
 			</dependencies>
 			<build>
 				<plugins>
-					<!-- <plugin> -->
-					<!-- <artifactId>maven-surefire-plugin</artifactId> -->
-					<!-- <version>${version.surefire.plugin}</version> -->
-					<!-- <configuration> -->
-					<!-- <skip>true</skip> -->
-					<!-- </configuration> -->
 					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-failsafe-plugin</artifactId>
-						<version>${version.failsafe.plugin}</version>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>${version.surefire.plugin}</version>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
 					</plugin>
+					<!-- <plugin> -->
+					<!-- <groupId>org.apache.maven.plugins</groupId> -->
+					<!-- <artifactId>maven-failsafe-plugin</artifactId> -->
+					<!-- <version>${version.failsafe.plugin}</version> -->
+					<!-- </plugin> -->
 				</plugins>
 			</build>
 		</profile>

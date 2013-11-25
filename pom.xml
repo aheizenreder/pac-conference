@@ -119,6 +119,7 @@
 				<groupId>com.prodyna.pac.conference</groupId>
 				<artifactId>pac-conference-conference-impl</artifactId>
 				<version>${project.version}</version>
+				<type>ejb</type>
 			</dependency>
 			<dependency>
 				<groupId>com.prodyna.pac.conference</groupId>
@@ -133,12 +134,6 @@
 			</dependency>
 			<dependency>
 				<groupId>com.prodyna.pac.conference</groupId>
-				<artifactId>pac-conference-persistence</artifactId>
-				<version>${project.version}</version>
-				<type>ejb</type>
-			</dependency>
-			<dependency>
-				<groupId>com.prodyna.pac.conference</groupId>
 				<artifactId>pac-conference-location-intf</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -146,11 +141,7 @@
 				<groupId>com.prodyna.pac.conference</groupId>
 				<artifactId>pac-conference-location-impl</artifactId>
 				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.prodyna.pac.conference</groupId>
-				<artifactId>pac-conference-cdi</artifactId>
-				<version>${project.version}</version>
+				<type>ejb</type>
 			</dependency>
 			<dependency>
 				<groupId>org.jboss.arquillian.container</groupId>
@@ -166,6 +157,17 @@
 			<dependency>
 				<groupId>com.prodyna.pac.conference</groupId>
 				<artifactId>pac-conference-speaker-impl</artifactId>
+				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.conference</groupId>
+				<artifactId>pac-conference-cdi</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.conference</groupId>
+				<artifactId>pac-conference-persistence</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

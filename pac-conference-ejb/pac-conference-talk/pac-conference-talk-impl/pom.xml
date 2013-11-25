@@ -10,7 +10,7 @@
    </parent>
 
    <artifactId>pac-conference-talk-impl</artifactId>
-   <packaging>jar</packaging>
+   <packaging>ejb</packaging>
 
    <name>pac-conference-talk implementation module</name>
 

@@ -27,7 +27,7 @@ public class LocationServiceImpl implements LocationService {
 	private Logger log;
 
 	@Inject
-	EntityManager em;
+	private EntityManager em;
 
 	/*
 	 * (non-Javadoc)
