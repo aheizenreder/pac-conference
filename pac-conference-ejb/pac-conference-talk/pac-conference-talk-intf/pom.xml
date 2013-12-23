@@ -17,6 +17,21 @@
    <dependencies>
 
 
+   <dependency>
+   	<groupId>com.prodyna.pac.conference</groupId>
+   	<artifactId>pac-conference-location-intf</artifactId>
+   	<scope>provided</scope>
+   </dependency>
+   <dependency>
+   	<groupId>com.prodyna.pac.conference</groupId>
+   	<artifactId>pac-conference-speaker-intf</artifactId>
+   	<scope>provided</scope>
+   </dependency>
+   <dependency>
+   	<groupId>com.prodyna.pac.conference</groupId>
+   	<artifactId>pac-conference-conference-intf</artifactId>
+   	<scope>provided</scope>
+   </dependency>
    </dependencies>
 
 </project>
