@@ -10,6 +10,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -17,6 +19,8 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.prodyna.pac.conference.conference.model.Conference;
 
 /**
  * Entity Talk represents a conference talk.
@@ -26,7 +30,9 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "talk_talk", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
-@NamedQueries(@NamedQuery(name = Talk.SELECT_ALL_TALKS, query = "SELECT t FROM Talk t"))
+@NamedQueries({
+		@NamedQuery(name = Talk.SELECT_ALL_TALKS, query = "SELECT t FROM Talk t"),
+		@NamedQuery(name = Talk.FIND_TALKS_FOR_CONFERENCE, query = "SELECT t FROM Talk t WHERE t.conference.id = :conferenceId") })
 public class Talk implements Serializable {
 
 	/**
@@ -35,6 +41,8 @@ public class Talk implements Serializable {
 	private static final long serialVersionUID = -3184036367245291034L;
 
 	public static final String SELECT_ALL_TALKS = "selectAllTalks";
+	public static final String FIND_TALKS_FOR_CONFERENCE = "findTalksByConference";
+	public static final String FIND_TALKS_FOR_CONFERENCE_PARAM_NAME_CONFERENCE_ID = "conferenceId";
 
 	@Id
 	@GeneratedValue
@@ -54,6 +62,10 @@ public class Talk implements Serializable {
 	@Min(value = 15)
 	private Integer duration;
 
+	@ManyToOne
+	@JoinColumn(name = "conference_id", referencedColumnName = "id")
+	private Conference conference;
+
 	/**
 	 * Default constructor
 	 */
@@ -66,15 +78,17 @@ public class Talk implements Serializable {
 	 * @param description
 	 * @param startDate
 	 * @param duration
+	 * @param conference
 	 */
 	public Talk(String title, String description, Date startDate,
-			Integer duration) {
+			Integer duration, Conference conference) {
 		super();
 
 		this.title = title;
 		this.description = description;
 		this.startDate = startDate;
 		this.duration = duration;
+		this.conference = conference;
 	}
 
 	/**
@@ -83,15 +97,17 @@ public class Talk implements Serializable {
 	 * @param description
 	 * @param startDate
 	 * @param duration
+	 * @param conference
 	 */
 	public Talk(Long id, String title, String description, Date startDate,
-			Integer duration) {
+			Integer duration, Conference conference) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.startDate = startDate;
 		this.duration = duration;
+		this.conference = conference;
 	}
 
 	/**
@@ -167,6 +183,21 @@ public class Talk implements Serializable {
 	 */
 	public void setDuration(Integer duration) {
 		this.duration = duration;
+	}
+
+	/**
+	 * @return the conference
+	 */
+	public Conference getConference() {
+		return conference;
+	}
+
+	/**
+	 * @param conference
+	 *            the conference to set
+	 */
+	public void setConference(Conference conference) {
+		this.conference = conference;
 	}
 
 	/*
