@@ -136,7 +136,7 @@ public interface TalkService {
 	 * @return a list with all talks for the given conference. If no talks for
 	 *         the given conference exist, then the empty list will be returned.
 	 */
-	public List<Talk> findTalkByConference(Conference conference);
+	public List<Talk> findTalksByConference(Conference conference);
 
 	/**
 	 * get all Speaker for a talk.
@@ -156,7 +156,7 @@ public interface TalkService {
 	 * @return a list with all talks hold by given speaker. If no talks are
 	 *         found for the speaker, then a empty list will be returned.
 	 */
-	public List<Talk> findTalkBySpeaker(Speaker speaker);
+	public List<Talk> findTalksBySpeaker(Speaker speaker);
 
 	/**
 	 * get all Talks assigned to a room.
@@ -166,14 +166,14 @@ public interface TalkService {
 	 * @return a list with all talks assigned to the given room. If no talk take
 	 *         place in the room, then a empty list will be returned.
 	 */
-	public List<Talk> findTalkByRoom(Room room);
+	public List<Talk> findTalksByRoom(Room room);
 
 	/**
 	 * get the room assigned to the given talk.
 	 * 
 	 * @param talk
 	 *            talk which room is to return.
-	 * @return the room assignet to the talk. If no room is assigned to the
+	 * @return the room assigned to the talk. If no room is assigned to the
 	 *         talk, then return is null.
 	 */
 	public Room findRoomByTalk(Talk talk);

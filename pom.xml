@@ -170,6 +170,17 @@
 				<artifactId>pac-conference-persistence</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.conference</groupId>
+				<artifactId>pac-conference-talk-intf</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.conference</groupId>
+				<artifactId>pac-conference-talk-impl</artifactId>
+				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
