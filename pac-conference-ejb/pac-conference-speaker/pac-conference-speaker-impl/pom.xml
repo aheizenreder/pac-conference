@@ -50,6 +50,11 @@
 			<artifactId>pac-conference-cdi</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.conference</groupId>
+			<artifactId>pac-conference-talk-intf</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 </project>

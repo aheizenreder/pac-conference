@@ -27,7 +27,7 @@ import com.prodyna.pac.conference.talk.TalkUtil;
 @NamedQueries({
 		@NamedQuery(name = TalkToRoom.FIND_TALKS_BY_ROOM, query = "SELECT tr.talk FROM TalkToRoom tr WHERE tr.room.id = :roomId ORDER BY tr.startDate, tr.endDate"),
 		@NamedQuery(name = TalkToRoom.FIND_ROOM_BY_TALK, query = "SELECT tr.room FROM TalkToRoom tr WHERE tr.talk.id = :talkId"),
-		@NamedQuery(name = TalkToRoom.FIND_ROOMS_COLLISIONS, query = "SELECT tr FROM TalkToRoom tr where (tr.startDate > :startDate AND tr.startDate < :endDate) OR (tr.endDate > :startDate and tr.endDate < :endDate ORDER BY tr.startDate, tr.endDate") })
+		@NamedQuery(name = TalkToRoom.FIND_ROOMS_COLLISIONS, query = "SELECT tr FROM TalkToRoom tr where tr.room.id = :roomId AND ((tr.startDate > :startDate AND tr.startDate < :endDate) OR (tr.endDate > :startDate and tr.endDate < :endDate)) ORDER BY tr.startDate, tr.endDate") })
 public class TalkToRoom implements Serializable {
 
 	public static final String FIND_TALKS_BY_ROOM = "findTalksByRoom";
@@ -35,8 +35,9 @@ public class TalkToRoom implements Serializable {
 	public static final String FIND_ROOM_BY_TALK = "findRoomByTalk";
 	public static final String FIND_ROOM_BY_TALK_PARAM_NAME_TALK_ID = "talkId";
 	public static final String FIND_ROOMS_COLLISIONS = "findRoomsCollisions";
+	public static final String FIND_ROOMS_COLLISIONS_PARAM_NAME_ROOM_ID = "roomId";
 	public static final String FIND_ROOMS_COLLISIONS_PARAM_NAME_START_DATE = "startDate";
-	public static final String FIND_ROOMS_COLLISIONS_PARAM_NaME_END_DATE = "endDate";
+	public static final String FIND_ROOMS_COLLISIONS_PARAM_NAME_END_DATE = "endDate";
 
 	/**
 	 * generated serialization id.

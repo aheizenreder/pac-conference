@@ -77,6 +77,15 @@
         	<groupId>com.prodyna.pac.conference</groupId>
         	<artifactId>pac-conference-location-intf</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>com.prodyna.pac.conference</groupId>
+        	<artifactId>pac-conference-talk-intf</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>com.prodyna.pac.conference</groupId>
+        	<artifactId>pac-conference-talk-impl</artifactId>
+        	<type>ejb</type>
+        </dependency>
     </dependencies>
 
     <build>
