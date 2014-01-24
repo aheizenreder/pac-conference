@@ -15,10 +15,15 @@ import org.slf4j.Logger;
 
 import com.prodyna.pac.conference.conference.model.Conference;
 import com.prodyna.pac.conference.location.model.Room;
+import com.prodyna.pac.conference.location.service.RoomService;
 import com.prodyna.pac.conference.speaker.model.Speaker;
+import com.prodyna.pac.conference.speaker.service.SpeakerService;
 import com.prodyna.pac.conference.talk.TalkUtil;
 import com.prodyna.pac.conference.talk.model.Talk;
 import com.prodyna.pac.conference.talk.model.TalkToRoom;
+import com.prodyna.pac.conference.talk.model.TalkToRoomKey;
+import com.prodyna.pac.conference.talk.model.TalkToSpeaker;
+import com.prodyna.pac.conference.talk.model.TalkToSpeakerKey;
 import com.prodyna.pac.conference.talk.service.exception.OccupiedRoomException;
 import com.prodyna.pac.conference.talk.service.exception.SpeakerNotAvailableException;
 import com.prodyna.pac.conference.talk.service.exception.WrongLocationException;
@@ -37,6 +42,12 @@ public class TalkServiceImpl implements TalkService {
 
 	@Inject
 	private EntityManager em;
+
+	@Inject
+	private RoomService roomService;
+
+	@Inject
+	private SpeakerService speakerService;
 
 	/**
 	 * Default empty constructor.
@@ -159,10 +170,15 @@ public class TalkServiceImpl implements TalkService {
 				.getResultList();
 		// are there any collision found?
 		if (talkToRoomResultList == null || talkToRoomResultList.isEmpty()) {
-			// persists assignment for room.
+
 			log.info("Assign talk '" + talk.getTitle() + "' and room '"
 					+ room.getName() + "...");
-			TalkToRoom ttr = new TalkToRoom(talk, room);
+			log.debug("get current versions of talk and room from database ...");
+			Room roomCurrentState = roomService.get(room.getId());
+			Talk talkCurrentState = get(talk.getId());
+
+			TalkToRoom ttr = new TalkToRoom(talkCurrentState, roomCurrentState);
+			// persists assignment for room.
 			em.persist(ttr);
 			em.flush();
 		} else {
@@ -187,9 +203,13 @@ public class TalkServiceImpl implements TalkService {
 	 */
 	@Override
 	public boolean unassignRoom(Talk talk, Room room) {
+		TalkToRoomKey ttrKey = new TalkToRoomKey(talk.getId(), room.getId());
+		// look for assignment
+		TalkToSpeaker ttr = em.find(TalkToSpeaker.class, ttrKey);
+		em.remove(ttr);
+		em.flush();
 
-		
-		return false;
+		return true;
 	}
 
 	/*
@@ -203,8 +223,48 @@ public class TalkServiceImpl implements TalkService {
 	@Override
 	public boolean assignSpeaker(Talk talk, Speaker speaker)
 			throws SpeakerNotAvailableException {
-		// TODO Auto-generated method stub
-		return false;
+		// first check for speaker collisions
+		Query findSpeakerCollisionQuery = em
+				.createNamedQuery(TalkToSpeaker.FIND_SPEAKER_COLLISIONS);
+		findSpeakerCollisionQuery.setParameter(
+				TalkToSpeaker.FIND_SPEAKER_COLLISIONS_PARAM_NAME_SPEAKER_ID,
+				speaker.getId());
+		findSpeakerCollisionQuery.setParameter(
+				TalkToSpeaker.FIND_SPEAKER_COLLISIONS_PARAM_NAME_START_DATE,
+				talk.getStartDate());
+		Date endDate = TalkUtil.calculateTalkEndDate(talk);
+		findSpeakerCollisionQuery.setParameter(
+				TalkToSpeaker.FIND_SPEAKER_COLLISIONS_PARAM_NAME_END_DATE,
+				endDate);
+
+		List<TalkToSpeaker> talkToSpeakerResultList = (List<TalkToSpeaker>) findSpeakerCollisionQuery
+				.getResultList();
+		// are there any collision found?
+		if (talkToSpeakerResultList == null
+				|| talkToSpeakerResultList.isEmpty()) {
+
+			log.info("Assign talk '" + talk.getTitle() + "' and speaker '"
+					+ speaker.getName() + "...");
+			log.debug("get current versions of talk and speaker from database ...");
+			Speaker speakerCurrentState = speakerService.get(speaker.getId());
+			Talk talkCurrentState = get(talk.getId());
+
+			TalkToSpeaker ttr = new TalkToSpeaker(talkCurrentState,
+					speakerCurrentState);
+			// persists assignment for speaker.
+			em.persist(ttr);
+			em.flush();
+		} else {
+			// there are collisions
+			TalkToSpeaker tts = talkToSpeakerResultList.get(0);
+			log.info("Found collision for room '" + tts.getSpeaker().getName()
+					+ "' from " + tts.getStartDate() + " to "
+					+ tts.getEndDate() + "!");
+			throw new SpeakerNotAvailableException("Speaker "
+					+ speaker.getName() + "is not available!",
+					tts.getSpeaker(), tts.getStartDate(), tts.getEndDate());
+		}
+		return true;
 	}
 
 	/*
@@ -217,8 +277,14 @@ public class TalkServiceImpl implements TalkService {
 	 */
 	@Override
 	public boolean unassignSpeaker(Talk talk, Speaker speaker) {
-		// TODO Auto-generated method stub
-		return false;
+		TalkToSpeakerKey ttsKey = new TalkToSpeakerKey(talk.getId(),
+				speaker.getId());
+		// find assignment
+		TalkToSpeaker tts = em.find(TalkToSpeaker.class, ttsKey);
+		em.remove(tts);
+		em.flush();
+
+		return true;
 	}
 
 	/*

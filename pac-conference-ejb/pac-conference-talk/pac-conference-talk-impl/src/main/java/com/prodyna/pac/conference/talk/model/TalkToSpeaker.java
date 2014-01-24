@@ -15,13 +15,23 @@ import javax.validation.constraints.NotNull;
  */
 @IdClass(TalkToSpeakerKey.class)
 @Entity
-@Table(name = "talk_talk_to_speaker", uniqueConstraints = @UniqueConstraint(columnNames ={ "talk_id", "speaker_id"}))
+@Table(name = "talk_talk_to_speaker", uniqueConstraints = @UniqueConstraint(columnNames = {
+		"talk_id", "speaker_id" }))
 @NamedQueries({
-		@NamedQuery(name = "findSpeakersByTalk", query = "SELECT ts.speaker FROM TalkToSpeaker ts WHERE ts.talk.id = :talkId"),
-		@NamedQuery(name = "findTalksBySpeaker", query = "SELECT ts.talk FROM TalkToSpeaker ts WHERE ts.speaker.id = :speakerId ORDER BY ts.startDate, ts.endDate"),
-		@NamedQuery(name = "findSpeakerCollisions", query = "SELECT ts FROM TalkToSpeaker ts WHERE (ts.startDate > :startDate and ts.startDate < :endDate) or (ts.endDate > :startDate and ts.endDate < :endDate) ORDER BY ts.startDate, ts.endDate") })
+		@NamedQuery(name = TalkToSpeaker.FIND_SPEAKER_BY_TALK, query = "SELECT ts.speaker FROM TalkToSpeaker ts WHERE ts.talk.id = :talkId"),
+		@NamedQuery(name = TalkToSpeaker.FIND_TALKS_BY_SPEAKER, query = "SELECT ts.talk FROM TalkToSpeaker ts WHERE ts.speaker.id = :speakerId ORDER BY ts.startDate, ts.endDate"),
+		@NamedQuery(name = TalkToSpeaker.FIND_SPEAKER_COLLISIONS, query = "SELECT ts FROM TalkToSpeaker ts WHERE ts.speaker.id = :speakerId AND ((ts.startDate > :startDate and ts.startDate < :endDate) or (ts.endDate > :startDate and ts.endDate < :endDate)) ORDER BY ts.startDate, ts.endDate") })
 public class TalkToSpeaker implements Serializable {
 
+	// constants for names in named queries
+	public static final String FIND_SPEAKER_BY_TALK = "findSpeakersByTalk";
+	public static final String FIND_SPEAKER_BY_TALK_PARAM_NAME_SPEAKER_ID = "speakerId";
+	public static final String FIND_TALKS_BY_SPEAKER = "findTalksBySpeaker";
+	public static final String FIND_TALKS_BY_SPEAKER_PARAM_NAME_TALK_ID = "talkId";
+	public static final String FIND_SPEAKER_COLLISIONS = "findSpeakerCollisions";
+	public static final String FIND_SPEAKER_COLLISIONS_PARAM_NAME_SPEAKER_ID = "speakerId";
+	public static final String FIND_SPEAKER_COLLISIONS_PARAM_NAME_START_DATE = "startDate";
+	public static final String FIND_SPEAKER_COLLISIONS_PARAM_NAME_END_DATE = "endDate";
 	/**
 	 * generated serialization id
 	 */
