@@ -24,5 +24,16 @@
   		<artifactId>pac-conference-conference-intf</artifactId>
   		<scope>provided</scope>
   	</dependency>
+  	<dependency>
+  		<groupId>com.prodyna.pac.conference</groupId>
+  		<artifactId>pac-conference-talk-intf</artifactId>
+  		<scope>provided</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.prodyna.pac.conference</groupId>
+  		<artifactId>pac-conference-talk-impl</artifactId>
+  		<type>ejb</type>
+  		<scope>provided</scope>
+  	</dependency>
   </dependencies>
 </project>

@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -22,8 +23,9 @@ import com.prodyna.pac.conference.talk.TalkUtil;
  * additional information to the start and end date of the assignment.
  * 
  */
+@IdClass(TalkToRoomKey.class)
 @Entity
-@Table(name = "talk_talk_to_room", uniqueConstraints = @UniqueConstraint(columnNames = "talk_id, room_id"))
+@Table(name = "talk_talk_to_room", uniqueConstraints = @UniqueConstraint(columnNames = {"talk_id", "room_id"}))
 @NamedQueries({
 		@NamedQuery(name = TalkToRoom.FIND_TALKS_BY_ROOM, query = "SELECT tr.talk FROM TalkToRoom tr WHERE tr.room.id = :roomId ORDER BY tr.startDate, tr.endDate"),
 		@NamedQuery(name = TalkToRoom.FIND_ROOM_BY_TALK, query = "SELECT tr.room FROM TalkToRoom tr WHERE tr.talk.id = :talkId"),

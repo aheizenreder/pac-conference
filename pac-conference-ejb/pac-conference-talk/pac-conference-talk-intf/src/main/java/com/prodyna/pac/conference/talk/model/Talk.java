@@ -62,6 +62,7 @@ public class Talk implements Serializable {
 	@Min(value = 15)
 	private Integer duration;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "conference_id", referencedColumnName = "id")
 	private Conference conference;

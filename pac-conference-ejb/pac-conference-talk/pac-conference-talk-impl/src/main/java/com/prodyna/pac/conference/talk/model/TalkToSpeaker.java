@@ -13,12 +13,13 @@ import javax.validation.constraints.NotNull;
  * This entity represents the assignment of talks to speakers.
  * 
  */
+@IdClass(TalkToSpeakerKey.class)
 @Entity
-@Table(name = "talk_talk_to_speaker", uniqueConstraints = @UniqueConstraint(columnNames = "talk_id, speaker_id"))
+@Table(name = "talk_talk_to_speaker", uniqueConstraints = @UniqueConstraint(columnNames ={ "talk_id", "speaker_id"}))
 @NamedQueries({
 		@NamedQuery(name = "findSpeakersByTalk", query = "SELECT ts.speaker FROM TalkToSpeaker ts WHERE ts.talk.id = :talkId"),
 		@NamedQuery(name = "findTalksBySpeaker", query = "SELECT ts.talk FROM TalkToSpeaker ts WHERE ts.speaker.id = :speakerId ORDER BY ts.startDate, ts.endDate"),
-		@NamedQuery(name = "findSpeakerCollisions", query = "SELECT ts FROM TalkToSpeaker ts WHERE (ts.startDate > :startDate and ts.startDate < :endDate) or (ts.endDate > :startDate and ts.endDate < :endDate) ORDER BY ts.startDate, ts.endDate")})
+		@NamedQuery(name = "findSpeakerCollisions", query = "SELECT ts FROM TalkToSpeaker ts WHERE (ts.startDate > :startDate and ts.startDate < :endDate) or (ts.endDate > :startDate and ts.endDate < :endDate) ORDER BY ts.startDate, ts.endDate") })
 public class TalkToSpeaker implements Serializable {
 
 	/**
