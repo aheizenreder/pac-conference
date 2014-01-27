@@ -9,11 +9,12 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
 
 import com.prodyna.pac.conference.conference.model.Conference;
+import com.prodyna.pac.conference.location.model.Location;
 import com.prodyna.pac.conference.location.model.Room;
 import com.prodyna.pac.conference.location.service.RoomService;
 import com.prodyna.pac.conference.speaker.model.Speaker;
@@ -100,9 +101,9 @@ public class TalkServiceImpl implements TalkService {
 	public List<Talk> getAll() {
 		log.info("Select all talks ...");
 
-		Query selectAllTalksQuery = em.createNamedQuery(Talk.SELECT_ALL_TALKS);
-		List<Talk> resultList = (List<Talk>) selectAllTalksQuery
-				.getResultList();
+		TypedQuery<Talk> selectAllTalksQuery = em.createNamedQuery(
+				Talk.SELECT_ALL_TALKS, Talk.class);
+		List<Talk> resultList = selectAllTalksQuery.getResultList();
 		if (resultList != null) {
 			log.info("there are " + resultList.size() + " talks found.");
 		}
@@ -153,9 +154,19 @@ public class TalkServiceImpl implements TalkService {
 	@Override
 	public boolean assignRoom(Talk talk, Room room)
 			throws WrongLocationException, OccupiedRoomException {
-		// first check for room collisions
-		Query findRoomCollisionQuery = em
-				.createNamedQuery(TalkToRoom.FIND_ROOMS_COLLISIONS);
+		// first check for location of talk and room
+		Location confLocation = talk.getConference().getLocation();
+		Location roomLocation = room.getLocation();
+
+		if (!confLocation.equals(roomLocation)) {
+			log.error("Location of the talk and room are not the same!");
+			throw new WrongLocationException(
+					"Location of the talk and room are not the same!",
+					confLocation);
+		}
+		// next check for room collisions
+		TypedQuery<TalkToRoom> findRoomCollisionQuery = em.createNamedQuery(
+				TalkToRoom.FIND_ROOMS_COLLISIONS, TalkToRoom.class);
 		findRoomCollisionQuery.setParameter(
 				TalkToRoom.FIND_ROOMS_COLLISIONS_PARAM_NAME_ROOM_ID,
 				room.getId());
@@ -166,7 +177,7 @@ public class TalkServiceImpl implements TalkService {
 		findRoomCollisionQuery.setParameter(
 				TalkToRoom.FIND_ROOMS_COLLISIONS_PARAM_NAME_END_DATE, endDate);
 
-		List<TalkToRoom> talkToRoomResultList = (List<TalkToRoom>) findRoomCollisionQuery
+		List<TalkToRoom> talkToRoomResultList = findRoomCollisionQuery
 				.getResultList();
 		// are there any collision found?
 		if (talkToRoomResultList == null || talkToRoomResultList.isEmpty()) {
@@ -205,7 +216,7 @@ public class TalkServiceImpl implements TalkService {
 	public boolean unassignRoom(Talk talk, Room room) {
 		TalkToRoomKey ttrKey = new TalkToRoomKey(talk.getId(), room.getId());
 		// look for assignment
-		TalkToSpeaker ttr = em.find(TalkToSpeaker.class, ttrKey);
+		TalkToRoom ttr = em.find(TalkToRoom.class, ttrKey);
 		em.remove(ttr);
 		em.flush();
 
@@ -224,8 +235,9 @@ public class TalkServiceImpl implements TalkService {
 	public boolean assignSpeaker(Talk talk, Speaker speaker)
 			throws SpeakerNotAvailableException {
 		// first check for speaker collisions
-		Query findSpeakerCollisionQuery = em
-				.createNamedQuery(TalkToSpeaker.FIND_SPEAKER_COLLISIONS);
+		TypedQuery<TalkToSpeaker> findSpeakerCollisionQuery = em
+				.createNamedQuery(TalkToSpeaker.FIND_SPEAKER_COLLISIONS,
+						TalkToSpeaker.class);
 		findSpeakerCollisionQuery.setParameter(
 				TalkToSpeaker.FIND_SPEAKER_COLLISIONS_PARAM_NAME_SPEAKER_ID,
 				speaker.getId());
@@ -237,7 +249,7 @@ public class TalkServiceImpl implements TalkService {
 				TalkToSpeaker.FIND_SPEAKER_COLLISIONS_PARAM_NAME_END_DATE,
 				endDate);
 
-		List<TalkToSpeaker> talkToSpeakerResultList = (List<TalkToSpeaker>) findSpeakerCollisionQuery
+		List<TalkToSpeaker> talkToSpeakerResultList = findSpeakerCollisionQuery
 				.getResultList();
 		// are there any collision found?
 		if (talkToSpeakerResultList == null
@@ -262,7 +274,7 @@ public class TalkServiceImpl implements TalkService {
 					+ tts.getEndDate() + "!");
 			throw new SpeakerNotAvailableException("Speaker "
 					+ speaker.getName() + "is not available!",
-					tts.getSpeaker(), tts.getStartDate(), tts.getEndDate());
+					tts.getTalk(), tts.getStartDate(), tts.getEndDate());
 		}
 		return true;
 	}
@@ -296,8 +308,18 @@ public class TalkServiceImpl implements TalkService {
 	 */
 	@Override
 	public List<Talk> findTalksByConference(Conference conference) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Talk> findTalksByConference = em.createNamedQuery(
+				Talk.FIND_TALKS_FOR_CONFERENCE, Talk.class);
+		findTalksByConference.setParameter(
+				Talk.FIND_TALKS_FOR_CONFERENCE_PARAM_NAME_CONFERENCE_ID,
+				conference.getId());
+		List<Talk> talksByConferenceList = findTalksByConference
+				.getResultList();
+
+		log.info("Found " + talksByConferenceList.size()
+				+ " talks for conference '" + conference.getTitle() + "'.");
+
+		return talksByConferenceList;
 	}
 
 	/*
@@ -309,8 +331,16 @@ public class TalkServiceImpl implements TalkService {
 	 */
 	@Override
 	public List<Speaker> findSpeakerByTalk(Talk talk) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Speaker> findSpeakersByTalk = em.createNamedQuery(
+				TalkToSpeaker.FIND_SPEAKERS_BY_TALK, Speaker.class);
+		findSpeakersByTalk.setParameter(
+				TalkToSpeaker.FIND_SPEAKERS_BY_TALK_PARAM_NAME_TALK_ID,
+				talk.getId());
+		List<Speaker> speakerByTalkList = findSpeakersByTalk.getResultList();
+		log.info("Found " + speakerByTalkList.size() + " speaker for talk '"
+				+ talk.getTitle() + "'.");
+
+		return speakerByTalkList;
 	}
 
 	/*
@@ -322,8 +352,15 @@ public class TalkServiceImpl implements TalkService {
 	 */
 	@Override
 	public List<Talk> findTalksBySpeaker(Speaker speaker) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Talk> findTalksBySpeaker = em.createNamedQuery(
+				TalkToSpeaker.FIND_TALKS_BY_SPEAKER, Talk.class);
+		findTalksBySpeaker.setParameter(
+				TalkToSpeaker.FIND_TALKS_BY_SPEAKER_PARAM_NAME_SPEAKER_ID,
+				speaker.getId());
+		List<Talk> talksBySpeakerList = findTalksBySpeaker.getResultList();
+		log.info("Found " + talksBySpeakerList.size() + " talks for speaker '"
+				+ speaker.getName() + "'.");
+		return talksBySpeakerList;
 	}
 
 	/*
@@ -335,8 +372,15 @@ public class TalkServiceImpl implements TalkService {
 	 */
 	@Override
 	public List<Talk> findTalksByRoom(Room room) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Talk> findTalksByRoom = em.createNamedQuery(
+				TalkToRoom.FIND_TALKS_BY_ROOM, Talk.class);
+		findTalksByRoom.setParameter(
+				TalkToRoom.FIND_TALKS_BY_ROOM_PARAM_NAME_ROOM_ID, room.getId());
+		List<Talk> talksByRoomList = findTalksByRoom.getResultList();
+
+		log.info("Found " + talksByRoomList.size() + " talks in room '"
+				+ room.getName() + "'.");
+		return talksByRoomList;
 	}
 
 	/*
@@ -348,7 +392,14 @@ public class TalkServiceImpl implements TalkService {
 	 */
 	@Override
 	public Room findRoomByTalk(Talk talk) {
-		// TODO Auto-generated method stub
+		TypedQuery<Room> findRoomByTalk = em.createNamedQuery(
+				TalkToRoom.FIND_ROOM_BY_TALK, Room.class);
+		findRoomByTalk.setParameter(
+				TalkToRoom.FIND_ROOM_BY_TALK_PARAM_NAME_TALK_ID, talk.getId());
+		List<Room> roomByTalkList = findRoomByTalk.getResultList();
+
+		log.info("Found " + roomByTalkList.size() + " rooms for talk '"
+				+ talk.getTitle() + "'.");
 		return null;
 	}
 

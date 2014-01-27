@@ -32,6 +32,7 @@ import com.prodyna.pac.conference.speaker.model.Speaker;
 import com.prodyna.pac.conference.speaker.service.SpeakerService;
 import com.prodyna.pac.conference.talk.model.Talk;
 import com.prodyna.pac.conference.talk.service.exception.OccupiedRoomException;
+import com.prodyna.pac.conference.talk.service.exception.SpeakerNotAvailableException;
 import com.prodyna.pac.conference.talk.service.exception.WrongLocationException;
 
 /**
@@ -264,7 +265,140 @@ public class TalkServiceTest {
 		}
 
 		talkService.unassignRoom(talk, room);
-		
+
 		Assert.assertNull(notExpectedException);
+	}
+
+	@Test(expected = WrongLocationException.class)
+	public void testWrongLocationException() throws WrongLocationException {
+		Location otherLocation = new Location("Test Location",
+				"Test location for WrongLoactionException test", "Test Street",
+				"1", "Test City", "12345", "Test Country");
+		locationService.create(otherLocation);
+
+		Room testRoom = new Room(otherLocation, "Test Room 1",
+				"A test room for WrongLocationException", 300);
+		roomService.create(testRoom);
+
+		// try to assing a room with other location than talk
+		try {
+			talkService.assignRoom(talk, testRoom);
+		} catch (WrongLocationException e) {
+			log.error("Expected WrongLocationException was thrown: " + e);
+			Assert.assertNotNull(e.getExpectedLocation());
+			throw e;
+		} catch (OccupiedRoomException e) {
+			log.error("Room is already occupied! " + e);
+		} finally {
+			// clean up after test.
+			if (testRoom != null && testRoom.getId() != null) {
+				roomService.delete(testRoom);
+			}
+			if (otherLocation != null && otherLocation.getId() != null) {
+				locationService.delete(otherLocation);
+			}
+		}
+	}
+
+	@Test(expected = OccupiedRoomException.class)
+	public void testOccupiedRoomException() throws OccupiedRoomException {
+
+		// assign room to talk
+		try {
+			talkService.assignRoom(talk, room);
+		} catch (WrongLocationException e) {
+			log.error("Unexpected WrongLocationException: " + e);
+			Assert.assertNull(e);
+		} catch (OccupiedRoomException e) {
+			log.error("Unexpected OccupiedRoomException: " + e);
+			Assert.assertNull(e);
+		}
+
+		// create new Talk
+		Talk otherTalk = new Talk("Test Talk",
+				"Test talk for test OccupiedRoomException.",
+				talk.getStartDate(), talk.getDuration() + 30, conference);
+		talkService.create(otherTalk);
+
+		Assert.assertNotNull("Id for other talk is null!", otherTalk.getId());
+
+		// try to assign room to otherTalk
+		try {
+			talkService.assignRoom(otherTalk, room);
+		} catch (WrongLocationException e) {
+			log.error("Unexpected WrongLocationException: " + e);
+			Assert.assertNull(e);
+		} catch (OccupiedRoomException e) {
+			log.info("Expected OccupiedRoomException was thrown: " + e);
+			Assert.assertNotNull("Collision talk is null!", e.getOccupyTalk());
+			Assert.assertNotNull("Occupy task start date is null!",
+					e.getStartDate());
+			Assert.assertNotNull("Occupy talk end date is null!",
+					e.getEndDate());
+			throw e;
+		} finally {
+			if (otherTalk != null && otherTalk.getId() != null) {
+				talkService.delete(otherTalk);
+			}
+			talkService.unassignRoom(talk, room);
+		}
+	}
+
+	@Test
+	public void testAssignUnassignSpeaker() {
+		Exception notExpectedException = null;
+
+		Assert.assertNotNull(talk);
+		Assert.assertNotNull("Talk id is null!", talk.getId());
+
+		Assert.assertNotNull(speaker);
+		Assert.assertNotNull("Speaker id is null!", speaker.getId());
+
+		// assign speaker to talk
+		try {
+			talkService.assignSpeaker(talk, speaker);
+		} catch (SpeakerNotAvailableException e) {
+			notExpectedException = e;
+			log.error("Unexpected exception: " + e);
+		}
+
+		talkService.unassignSpeaker(talk, speaker);
+
+		Assert.assertNull(notExpectedException);
+	}
+
+	@Test(expected = SpeakerNotAvailableException.class)
+	public void testSpeakerNotAvailableException()
+			throws SpeakerNotAvailableException {
+
+		try {
+			talkService.assignSpeaker(talk, speaker);
+		} catch (SpeakerNotAvailableException e) {
+			log.error("Unexpected SpeakerNotAvailableException: " + e);
+			Assert.assertNotNull(e);
+		}
+
+		Talk otherTalk = new Talk("Test Talk",
+				"Test talk for test SpeakerNotAvailableException.",
+				talk.getStartDate(), talk.getDuration() + 30, conference);
+		talkService.create(otherTalk);
+
+		try {
+			talkService.assignSpeaker(otherTalk, speaker);
+		} catch (SpeakerNotAvailableException e) {
+			log.info("Expected SpeakerNotAvailableException was thrown: " + e);
+			Assert.assertNotNull("Blocking talk is null!", e.getTalk());
+			Assert.assertNotNull(
+					"Start date and time of blocking talk is null!",
+					e.getStartDate());
+			Assert.assertNotNull("End date and time of blocking talk is null!",
+					e.getEndDate());
+			throw e;
+		} finally {
+			if (otherTalk != null && otherTalk.getId() != null) {
+				talkService.delete(otherTalk);
+			}
+			talkService.unassignSpeaker(talk, speaker);
+		}
 	}
 }

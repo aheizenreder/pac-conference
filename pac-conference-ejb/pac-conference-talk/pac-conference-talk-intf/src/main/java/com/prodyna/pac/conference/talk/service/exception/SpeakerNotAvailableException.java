@@ -5,7 +5,7 @@ package com.prodyna.pac.conference.talk.service.exception;
 
 import java.util.Date;
 
-import com.prodyna.pac.conference.speaker.model.Speaker;
+import com.prodyna.pac.conference.talk.model.Talk;
 
 /**
  * This exception is thrown if a speaker is not available in a specified time
@@ -27,17 +27,17 @@ public class SpeakerNotAvailableException extends Exception {
 	private static String DEFAULT_EXCEPTION_MESSAGE = "Speaker is not available";
 
 	/**
-	 * speaker which was not available for assignment to a talk.
+	 * talk which blocks the speaker.
 	 */
-	private Speaker speaker;
+	private Talk talk;
 
 	/**
-	 * start date and time of a time slot where the speaker is not available.
+	 * start date and time of a time slot of blocking talk.
 	 */
 	private Date startDate;
 
 	/**
-	 * end date and time of a time slot where the speaker is not available.
+	 * end date and time of a time slot of blocking talk.
 	 */
 	private Date endDate;
 
@@ -53,18 +53,17 @@ public class SpeakerNotAvailableException extends Exception {
 	 * 
 	 * @param message
 	 *            a detailed message for exception.
-	 * @param speaker
-	 *            the speaker, which is not available.
+	 * @param talk
+	 *            the talk, which blocks the speaker.
 	 * @param startDate
-	 *            start date and time of time slot where speaker is not
-	 *            available.
+	 *            start date and time of time slot of blocking talk.
 	 * @param endDate
-	 *            end date and time of time slot where speaker is not available.
+	 *            end date and time of time slot of blocking talk.
 	 */
-	public SpeakerNotAvailableException(String message, Speaker speaker,
+	public SpeakerNotAvailableException(String message, Talk talk,
 			Date startDate, Date endDate) {
 		super(message);
-		this.speaker = speaker;
+		this.talk = talk;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
@@ -74,18 +73,17 @@ public class SpeakerNotAvailableException extends Exception {
 	 * 
 	 * @param cause
 	 *            the Throwable as the cause for the exception.
-	 * @param speaker
-	 *            the speaker, which is not available.
+	 * @param talk
+	 *            the talk, which blocks the speaker.
 	 * @param startDate
-	 *            start date and time of time slot where speaker is not
-	 *            available.
+	 *            start date and time of time slot where of blocking talk.
 	 * @param endDate
-	 *            end date and time of time slot where speaker is not available.
+	 *            end date and time of time slot where of blocking talk.
 	 */
-	public SpeakerNotAvailableException(Throwable cause, Speaker speaker,
+	public SpeakerNotAvailableException(Throwable cause, Talk talk,
 			Date startDate, Date endDate) {
 		super(DEFAULT_EXCEPTION_MESSAGE, cause);
-		this.speaker = speaker;
+		this.talk = talk;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
@@ -97,25 +95,26 @@ public class SpeakerNotAvailableException extends Exception {
 	 *            a detailed message for the exception.
 	 * @param cause
 	 *            a Throwable as a cause for the exeption.
-	 * @param speaker
-	 *            the speaker which is not available.
+	 * @param talk
+	 *            the talk, which blocks the speaker
 	 * @param startDate
-	 *            start date and time of time slot where speaker is not
-	 *            available.
+	 *            start date and time of time slot of blocking talk.
 	 * @param endDate
-	 *            end date and time of time slot where speaker is not available.
+	 *            end date and time of time slot of blocking talk.
 	 */
 	public SpeakerNotAvailableException(String message, Throwable cause,
-			Speaker speaker, Date startDate, Date endDate) {
+			Talk talk, Date startDate, Date endDate) {
 		super(message, cause);
-		// TODO Auto-generated constructor stub
+		this.talk = talk;
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 
 	/**
-	 * @return the speaker
+	 * @return the blocking talk.
 	 */
-	public Speaker getSpeaker() {
-		return speaker;
+	public Talk getTalk() {
+		return talk;
 	}
 
 	/**
