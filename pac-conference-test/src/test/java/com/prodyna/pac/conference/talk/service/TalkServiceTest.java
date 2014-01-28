@@ -4,6 +4,7 @@
 package com.prodyna.pac.conference.talk.service;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -33,9 +34,12 @@ import com.prodyna.pac.conference.speaker.service.SpeakerService;
 import com.prodyna.pac.conference.talk.model.Talk;
 import com.prodyna.pac.conference.talk.service.exception.OccupiedRoomException;
 import com.prodyna.pac.conference.talk.service.exception.SpeakerNotAvailableException;
+import com.prodyna.pac.conference.talk.service.exception.TalkOutOfConferenceDateBoundsException;
 import com.prodyna.pac.conference.talk.service.exception.WrongLocationException;
 
 /**
+ * JUnit test for TalkService implementation.
+ * 
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
  * 
  */
@@ -187,6 +191,64 @@ public class TalkServiceTest {
 		Assert.assertNotNull(talk);
 	}
 
+	@Test(expected = TalkOutOfConferenceDateBoundsException.class)
+	public void testTalkOutOfConferenceDateBoundsExceptionByCreate()
+			throws TalkOutOfConferenceDateBoundsException {
+		Assert.assertNotNull("Conference is null!", conference);
+		Assert.assertNotNull("Conference id is null!", conference.getId());
+		Date confEndDate = conference.getEndDate();
+		Calendar testTalkStartDate = Calendar.getInstance();
+		testTalkStartDate.setTimeInMillis(confEndDate.getTime());
+		// add a day after conference end
+		testTalkStartDate.add(Calendar.DAY_OF_MONTH, 1);
+		testTalkStartDate.set(Calendar.HOUR_OF_DAY, 10);
+		testTalkStartDate.set(Calendar.MINUTE, 0);
+
+		// create a talk out of conference date bounds.
+		Talk testTalk = new Talk("Test Talk",
+				"Test talk to test TalkOutOfConferenceDateBoundsException.",
+				testTalkStartDate.getTime(), 90, conference);
+
+		try {
+			talkService.create(testTalk);
+		} catch (TalkOutOfConferenceDateBoundsException e) {
+			log.info("Expected exception was thrown: " + e);
+			Assert.assertNotNull("Conference is null in exception!",
+					e.getConference());
+			Assert.assertEquals("Conference from exeption is not the same!",
+					conference, e.getConference());
+			throw e;
+		} finally {
+			if (testTalk != null && testTalk.getId() != null) {
+				talkService.delete(testTalk);
+			}
+		}
+	}
+
+	@Test(expected = TalkOutOfConferenceDateBoundsException.class)
+	public void testTalkOutOfConferenceDateBoundsExceptionByUpdate()
+			throws TalkOutOfConferenceDateBoundsException {
+		// update talk start date
+		Calendar newTalkStartDate = Calendar.getInstance();
+		newTalkStartDate.setTimeInMillis(conference.getStartDate().getTime());
+		// move start date before conference start
+		newTalkStartDate.add(Calendar.DAY_OF_MONTH, -1);
+
+		talk.setStartDate(newTalkStartDate.getTime());
+
+		try {
+			talkService.update(talk);
+		} catch (TalkOutOfConferenceDateBoundsException e) {
+			log.info("Expected exception was thrown: " + e);
+			Assert.assertNotNull("Conference in exception is null!",
+					e.getConference());
+
+			throw e;
+		}
+
+		Assert.fail("Not implemented yet.");
+	}
+
 	@Test
 	public void testGetTalk() {
 		Assert.assertNotNull(talk);
@@ -233,7 +295,12 @@ public class TalkServiceTest {
 		talk.setTitle("New Title");
 
 		// update talk
-		talkService.update(talk);
+		try {
+			talkService.update(talk);
+		} catch (TalkOutOfConferenceDateBoundsException e) {
+			log.error(e.getLocalizedMessage());
+			Assert.assertNull("Unexpected exception!", e);
+		}
 
 		// request updated talk by id
 		Talk updatedTalk = talkService.get(talkId);
@@ -318,7 +385,12 @@ public class TalkServiceTest {
 		Talk otherTalk = new Talk("Test Talk",
 				"Test talk for test OccupiedRoomException.",
 				talk.getStartDate(), talk.getDuration() + 30, conference);
-		talkService.create(otherTalk);
+		try {
+			talkService.create(otherTalk);
+		} catch (TalkOutOfConferenceDateBoundsException e1) {
+			log.error("Unexpected exception: " + e1);
+			Assert.assertNull("Unexpected exception", e1);
+		}
 
 		Assert.assertNotNull("Id for other talk is null!", otherTalk.getId());
 
@@ -381,7 +453,12 @@ public class TalkServiceTest {
 		Talk otherTalk = new Talk("Test Talk",
 				"Test talk for test SpeakerNotAvailableException.",
 				talk.getStartDate(), talk.getDuration() + 30, conference);
-		talkService.create(otherTalk);
+		try {
+			talkService.create(otherTalk);
+		} catch (TalkOutOfConferenceDateBoundsException e1) {
+			log.error("Unexpected exception " + e1);
+			Assert.assertNull("Unexpected exception: " + e1);
+		}
 
 		try {
 			talkService.assignSpeaker(otherTalk, speaker);

@@ -27,6 +27,7 @@ import com.prodyna.pac.conference.talk.model.TalkToSpeaker;
 import com.prodyna.pac.conference.talk.model.TalkToSpeakerKey;
 import com.prodyna.pac.conference.talk.service.exception.OccupiedRoomException;
 import com.prodyna.pac.conference.talk.service.exception.SpeakerNotAvailableException;
+import com.prodyna.pac.conference.talk.service.exception.TalkOutOfConferenceDateBoundsException;
 import com.prodyna.pac.conference.talk.service.exception.WrongLocationException;
 
 /**
@@ -65,13 +66,35 @@ public class TalkServiceImpl implements TalkService {
 	 * .pac.conference.talk.model.Talk)
 	 */
 	@Override
-	public Talk create(Talk talk) {
+	public Talk create(Talk talk) throws TalkOutOfConferenceDateBoundsException {
 		log.info("Create new Talk " + talk.getTitle() + " ...");
+		// check the date bounds.
+		checkTalkDateBounds(talk);
+
 		em.persist(talk);
+		em.flush();
 		log.info("Talk " + talk.getTitle() + " persisted with id "
 				+ talk.getId());
 
 		return talk;
+	}
+
+	/**
+	 * @param talk
+	 * @throws TalkOutOfConferenceDateBoundsException
+	 */
+	private void checkTalkDateBounds(Talk talk)
+			throws TalkOutOfConferenceDateBoundsException {
+		Date talkEndDate = TalkUtil.calculateTalkEndDate(talk);
+		if (talk.getStartDate().getTime() < talk.getConference().getStartDate()
+				.getTime()
+				|| talkEndDate.getTime() > talk.getConference().getEndDate()
+						.getTime()) {
+			// Talk violates bounds of conference.
+			throw new TalkOutOfConferenceDateBoundsException(
+					"Talk is out of conference date bound!",
+					talk.getConference());
+		}
 	}
 
 	/*
@@ -118,8 +141,9 @@ public class TalkServiceImpl implements TalkService {
 	 * .pac.conference.talk.model.Talk)
 	 */
 	@Override
-	public Talk update(Talk talk) {
+	public Talk update(Talk talk) throws TalkOutOfConferenceDateBoundsException {
 		log.info("Update talk with id " + talk.getId() + " ...");
+		checkTalkDateBounds(talk);
 		em.merge(talk);
 		log.info("Talk with id " + talk.getId() + " updated.");
 
@@ -273,8 +297,8 @@ public class TalkServiceImpl implements TalkService {
 					+ "' from " + tts.getStartDate() + " to "
 					+ tts.getEndDate() + "!");
 			throw new SpeakerNotAvailableException("Speaker "
-					+ speaker.getName() + "is not available!",
-					tts.getTalk(), tts.getStartDate(), tts.getEndDate());
+					+ speaker.getName() + "is not available!", tts.getTalk(),
+					tts.getStartDate(), tts.getEndDate());
 		}
 		return true;
 	}

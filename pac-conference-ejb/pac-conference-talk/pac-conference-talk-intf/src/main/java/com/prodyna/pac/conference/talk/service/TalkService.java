@@ -11,6 +11,7 @@ import com.prodyna.pac.conference.speaker.model.Speaker;
 import com.prodyna.pac.conference.talk.model.Talk;
 import com.prodyna.pac.conference.talk.service.exception.OccupiedRoomException;
 import com.prodyna.pac.conference.talk.service.exception.SpeakerNotAvailableException;
+import com.prodyna.pac.conference.talk.service.exception.TalkOutOfConferenceDateBoundsException;
 import com.prodyna.pac.conference.talk.service.exception.WrongLocationException;
 
 /**
@@ -29,7 +30,14 @@ public interface TalkService {
 	 *            a conference talk to persists.
 	 * @return talk instance after persist.
 	 */
-	public Talk create(Talk talk);
+	/**
+	 * @param talk
+	 *            a conference talk to persists.
+	 * @return talk instance after persist.
+	 * @throws TalkOutOfConferenceDateBoundsException
+	 *             if the talk violates the date bound of the conference.
+	 */
+	public Talk create(Talk talk) throws TalkOutOfConferenceDateBoundsException;
 
 	/**
 	 * reads a conference talk from database by it's ID.
@@ -57,8 +65,11 @@ public interface TalkService {
 	 *            a conference talk with new data to persist.
 	 * 
 	 * @return the talk instance after update in database.
+	 * @throws TalkOutOfConferenceDateBoundsException
+	 *             if the new value for talks date bounds violate the conference
+	 *             date bounds.
 	 */
-	public Talk update(Talk talk);
+	public Talk update(Talk talk) throws TalkOutOfConferenceDateBoundsException;
 
 	/**
 	 * deletes given talk instance from database.

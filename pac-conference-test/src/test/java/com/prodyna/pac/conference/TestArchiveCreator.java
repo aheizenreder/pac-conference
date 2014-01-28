@@ -36,6 +36,7 @@ import com.prodyna.pac.conference.talk.service.TalkServiceImpl;
 import com.prodyna.pac.conference.talk.service.TalkServiceTest;
 import com.prodyna.pac.conference.talk.service.exception.OccupiedRoomException;
 import com.prodyna.pac.conference.talk.service.exception.SpeakerNotAvailableException;
+import com.prodyna.pac.conference.talk.service.exception.TalkOutOfConferenceDateBoundsException;
 import com.prodyna.pac.conference.talk.service.exception.WrongLocationException;
 import com.prodyna.pac.conference.util.Resources;
 
@@ -118,7 +119,8 @@ public class TestArchiveCreator {
 		jar.addClasses(Talk.class, TalkService.class,
 				OccupiedRoomException.class,
 				SpeakerNotAvailableException.class,
-				WrongLocationException.class);
+				WrongLocationException.class,
+				TalkOutOfConferenceDateBoundsException.class);
 
 		return jar;
 	}
@@ -127,8 +129,8 @@ public class TestArchiveCreator {
 		JavaArchive jar = ShrinkWrap.create(JavaArchive.class,
 				"pac-conference-talk-impl.jar");
 		jar.addClasses(TalkUtil.class, TalkToRoomKey.class, TalkToRoom.class,
-				TalkToSpeakerKey.class, TalkToSpeaker.class, TalkServiceImpl.class,
-				TalkServiceTest.class);
+				TalkToSpeakerKey.class, TalkToSpeaker.class,
+				TalkServiceImpl.class, TalkServiceTest.class);
 		jar.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 
 		return jar;
