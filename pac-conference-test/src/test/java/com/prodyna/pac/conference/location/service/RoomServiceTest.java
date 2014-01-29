@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 
+import com.prodyna.pac.conference.TestArchiveCreator;
 import com.prodyna.pac.conference.location.model.Location;
 import com.prodyna.pac.conference.location.model.Room;
 import com.prodyna.pac.conference.util.Resources;
@@ -51,17 +52,7 @@ public class RoomServiceTest {
 
 	@Deployment
 	public static Archive<?> createDeployment() {
-
-		WebArchive war = ShrinkWrap.create(WebArchive.class,
-				"pac-conference-location.war");
-		war.addClasses(Location.class, LocationService.class,
-				LocationServiceImpl.class, Room.class, RoomService.class,
-				RoomServiceImpl.class, Resources.class);
-		war.addAsResource("META-INF/test-persistence.xml",
-				"META-INF/persistence.xml");
-		war.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-
-		return war;
+		return TestArchiveCreator.createDeployment();
 	}
 
 	/**
@@ -306,8 +297,7 @@ public class RoomServiceTest {
 
 		log.info("select all rooms ...");
 		List<Room> allRoomList = roomService.getAll();
-		Assert.assertEquals(numOfRooms + numExistingRooms,
-				allRoomList.size());
+		Assert.assertEquals(numOfRooms + numExistingRooms, allRoomList.size());
 
 		log.info("delete all created rooms ...");
 		for (Room rom : testRoomList) {

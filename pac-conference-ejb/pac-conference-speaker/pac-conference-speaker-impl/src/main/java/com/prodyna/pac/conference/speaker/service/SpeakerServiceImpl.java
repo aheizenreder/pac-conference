@@ -12,12 +12,16 @@ import javax.persistence.Query;
 
 import org.slf4j.Logger;
 
+import com.prodyna.pac.conference.monitoring.logging.Logged;
+import com.prodyna.pac.conference.monitoring.performance.Monitored;
 import com.prodyna.pac.conference.speaker.model.Speaker;
 
 /**
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
  * 
  */
+@Logged
+@Monitored
 @Stateless
 public class SpeakerServiceImpl implements SpeakerService {
 

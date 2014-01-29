@@ -18,15 +18,18 @@ package com.prodyna.pac.conference.util;
 
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.jms.QueueConnectionFactory;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
- * This class uses CDI to alias Java EE resources, such as the persistence context, to CDI beans
+ * This class uses CDI to alias Java EE resources, such as the persistence
+ * context, to CDI beans
  * 
  * <p>
  * Example injection on a managed bean field:
@@ -38,14 +41,40 @@ import org.slf4j.LoggerFactory;
  * </pre>
  */
 public class Resources {
-    // use @SuppressWarnings to tell IDE to ignore warnings about field not being referenced directly
-    @SuppressWarnings("unused")
-    @Produces
-    @PersistenceContext
-    private EntityManager em;
+	// use @SuppressWarnings to tell IDE to ignore warnings about field not
+	// being referenced directly
+	@SuppressWarnings("unused")
+	@Produces
+	@PersistenceContext
+	private EntityManager em;
+	
+	private InitialContext initialContext;
 
-    @Produces
-    public Logger produceLog(InjectionPoint injectionPoint) {
-        return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
-    }
+	public Resources() {
+		try {
+			initialContext = new InitialContext();
+		} catch (NamingException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Produces
+	public Logger produceLog(InjectionPoint injectionPoint) {
+		return LoggerFactory.getLogger(injectionPoint.getMember()
+				.getDeclaringClass().getName());
+	}
+
+	@Produces
+	public InitialContext produceInitialContext(){
+		return initialContext;
+	}
+	
+	@Produces
+	public QueueConnectionFactory produceQueueConnectionFactory(){
+		try {
+			return (QueueConnectionFactory) produceInitialContext().lookup("ConnectionFactory");
+		} catch (NamingException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

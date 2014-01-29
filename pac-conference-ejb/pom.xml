@@ -172,7 +172,6 @@
     <module>pac-conference-speaker</module>
     <module>pac-conference-location</module>
     <module>pac-conference-monitoring</module>
-    <module>pac-conference-notification</module>
     <module>pac-conference-example</module>
     <module>pac-conference-persistence</module>
     <module>pac-conference-cdi</module>

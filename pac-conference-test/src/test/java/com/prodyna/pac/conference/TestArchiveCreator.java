@@ -3,6 +3,8 @@
  */
 package com.prodyna.pac.conference;
 
+import java.io.File;
+
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -21,6 +23,15 @@ import com.prodyna.pac.conference.location.service.LocationServiceTest;
 import com.prodyna.pac.conference.location.service.RoomService;
 import com.prodyna.pac.conference.location.service.RoomServiceImpl;
 import com.prodyna.pac.conference.location.service.RoomServiceTest;
+import com.prodyna.pac.conference.monitoring.logging.Logged;
+import com.prodyna.pac.conference.monitoring.logging.LoggingInterceptor;
+import com.prodyna.pac.conference.monitoring.notification.TalkChangedNotifierMDB;
+import com.prodyna.pac.conference.monitoring.performance.Entry;
+import com.prodyna.pac.conference.monitoring.performance.Monitored;
+import com.prodyna.pac.conference.monitoring.performance.MonitoredInterceptor;
+import com.prodyna.pac.conference.monitoring.performance.PerformanceMonitor;
+import com.prodyna.pac.conference.monitoring.performance.PerformanceMonitorEnabler;
+import com.prodyna.pac.conference.monitoring.performance.PerformanceMonitorMXBean;
 import com.prodyna.pac.conference.speaker.model.Speaker;
 import com.prodyna.pac.conference.speaker.service.SpeakerService;
 import com.prodyna.pac.conference.speaker.service.SpeakerServiceImpl;
@@ -31,6 +42,7 @@ import com.prodyna.pac.conference.talk.model.TalkToRoom;
 import com.prodyna.pac.conference.talk.model.TalkToRoomKey;
 import com.prodyna.pac.conference.talk.model.TalkToSpeaker;
 import com.prodyna.pac.conference.talk.model.TalkToSpeakerKey;
+import com.prodyna.pac.conference.talk.service.TalkChangedDecorator;
 import com.prodyna.pac.conference.talk.service.TalkService;
 import com.prodyna.pac.conference.talk.service.TalkServiceImpl;
 import com.prodyna.pac.conference.talk.service.TalkServiceTest;
@@ -51,10 +63,11 @@ public class TestArchiveCreator {
 				EnterpriseArchive.class, "pac-conference.ear");
 		conferenceEar.addAsLibraries(createCDIJar(), createPersistenceJar(),
 				createConferenceIntfJar(), createLocationIntfJar(),
-				createSpeakerIntfJar(), createTalkIntfJar());
+				createSpeakerIntfJar(), createTalkIntfJar(),
+				createMonitoringIntfJar());
 		conferenceEar.addAsModules(createConferenceImplJar(),
 				createLocationImplJar(), createSpeakerImplJar(),
-				createTalkImplJar());
+				createTalkImplJar(), createMonitoringImplJar());
 		conferenceEar.setApplicationXML("application.xml");
 
 		return conferenceEar;
@@ -72,7 +85,10 @@ public class TestArchiveCreator {
 		JavaArchive jar = ShrinkWrap.create(JavaArchive.class,
 				"pac-conference-conference-impl.jar");
 		jar.addClasses(ConferenceServiceImpl.class, ConferenceServiceTest.class);
-		jar.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+		jar.addAsManifestResource(
+				new File(
+						"../pac-conference-ejb/pac-conference-conference/pac-conference-conference-impl/src/main/resources/META-INF/beans.xml"),
+				"beans.xml");
 
 		return jar;
 	}
@@ -91,7 +107,10 @@ public class TestArchiveCreator {
 				"pac-conference-location-impl.jar");
 		jar.addClasses(RoomServiceImpl.class, LocationServiceImpl.class,
 				RoomServiceTest.class, LocationServiceTest.class);
-		jar.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+		jar.addAsManifestResource(
+				new File(
+						"../pac-conference-ejb/pac-conference-location/pac-conference-location-impl/src/main/resources/META-INF/beans.xml"),
+				"beans.xml");
 
 		return jar;
 	}
@@ -108,7 +127,10 @@ public class TestArchiveCreator {
 		JavaArchive jar = ShrinkWrap.create(JavaArchive.class,
 				"pac-conference-speaker-impl.jar");
 		jar.addClasses(SpeakerServiceImpl.class, SpeakerServiceTest.class);
-		jar.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+		jar.addAsManifestResource(
+				new File(
+						"../pac-conference-ejb/pac-conference-speaker/pac-conference-speaker-impl/src/main/resources/META-INF/beans.xml"),
+				"beans.xml");
 
 		return jar;
 	}
@@ -130,7 +152,31 @@ public class TestArchiveCreator {
 				"pac-conference-talk-impl.jar");
 		jar.addClasses(TalkUtil.class, TalkToRoomKey.class, TalkToRoom.class,
 				TalkToSpeakerKey.class, TalkToSpeaker.class,
-				TalkServiceImpl.class, TalkServiceTest.class);
+				TalkServiceImpl.class, TalkServiceTest.class,
+				TalkChangedDecorator.class);
+		jar.addAsManifestResource(
+				new File(
+						"../pac-conference-ejb/pac-conference-talk/pac-conference-talk-impl/src/main/resources/META-INF/beans.xml"),
+				"beans.xml");
+
+		return jar;
+	}
+
+	private static Archive<?> createMonitoringIntfJar() {
+		JavaArchive jar = ShrinkWrap.create(JavaArchive.class,
+				"pac-conference-monitoring-intf.jar");
+		jar.addClasses(Monitored.class, PerformanceMonitorMXBean.class,
+				Entry.class, Logged.class);
+
+		return jar;
+	}
+
+	private static Archive<?> createMonitoringImplJar() {
+		JavaArchive jar = ShrinkWrap.create(JavaArchive.class,
+				"pac-conference-monitoring-impl.jar");
+		jar.addClasses(PerformanceMonitor.class,
+				PerformanceMonitorEnabler.class, LoggingInterceptor.class,
+				MonitoredInterceptor.class, TalkChangedNotifierMDB.class);
 		jar.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 
 		return jar;

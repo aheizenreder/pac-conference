@@ -111,6 +111,19 @@
 			<artifactId>pac-conference-talk-impl</artifactId>
 			<type>ejb</type>
 		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.conference</groupId>
+			<artifactId>pac-conference-monitoring-intf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.conference</groupId>
+			<artifactId>pac-conference-monitoring-impl</artifactId>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.jms</groupId>
+			<artifactId>jboss-jms-api_1.1_spec</artifactId>
+		</dependency>
 	</dependencies>
 
 	<profiles>

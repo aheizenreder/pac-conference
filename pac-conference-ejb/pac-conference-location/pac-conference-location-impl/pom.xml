@@ -43,6 +43,17 @@
 			<artifactId>pac-conference-cdi</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.conference</groupId>
+			<artifactId>pac-conference-monitoring-intf</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.conference</groupId>
+			<artifactId>pac-conference-monitoring-impl</artifactId>
+			<type>ejb</type>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 </project>

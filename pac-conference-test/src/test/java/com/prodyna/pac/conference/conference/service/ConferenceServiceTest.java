@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 
+import com.prodyna.pac.conference.TestArchiveCreator;
 import com.prodyna.pac.conference.conference.model.Conference;
 import com.prodyna.pac.conference.location.model.Location;
 import com.prodyna.pac.conference.location.service.LocationService;
@@ -58,17 +59,7 @@ public class ConferenceServiceTest {
 	@Deployment
 	public static Archive<?> createDeployment() {
 
-		WebArchive war = ShrinkWrap.create(WebArchive.class,
-				"pac-conference-conference.war");
-		war.addClasses(Location.class, LocationService.class,
-				LocationServiceImpl.class, Conference.class,
-				ConferenceService.class, ConferenceServiceImpl.class,
-				Resources.class);
-		war.addAsResource("META-INF/test-persistence.xml",
-				"META-INF/persistence.xml");
-		war.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-
-		return war;
+		return TestArchiveCreator.createDeployment();
 	}
 
 	/**

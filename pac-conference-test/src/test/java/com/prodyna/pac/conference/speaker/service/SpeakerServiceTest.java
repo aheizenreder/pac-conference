@@ -12,9 +12,6 @@ import junit.framework.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,8 +20,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 
+import com.prodyna.pac.conference.TestArchiveCreator;
 import com.prodyna.pac.conference.speaker.model.Speaker;
-import com.prodyna.pac.conference.util.Resources;
 
 /**
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
@@ -44,15 +41,7 @@ public class SpeakerServiceTest {
 	@Deployment
 	public static Archive<?> createDeployment() {
 
-		WebArchive war = ShrinkWrap.create(WebArchive.class,
-				"pac-conference-speaker.war");
-		war.addClasses(Speaker.class, SpeakerService.class,
-				SpeakerServiceImpl.class, Resources.class);
-		war.addAsResource("META-INF/test-persistence.xml",
-				"META-INF/persistence.xml");
-		war.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-
-		return war;
+		return TestArchiveCreator.createDeployment();
 	}
 
 	/**
@@ -134,11 +123,11 @@ public class SpeakerServiceTest {
 	public void testGetAll() {
 		log.info("test get all speakers ...");
 		log.info("reate test speakers ...");
-		
+
 		List<Speaker> resultList = speakerService.getAll();
 		Assert.assertNotNull(resultList);
 		int extistNumSpeaker = resultList.size();
-		
+
 		speakerService.create(speaker);
 		Assert.assertNotNull(speaker.getId());
 
@@ -154,7 +143,7 @@ public class SpeakerServiceTest {
 
 		resultList = speakerService.getAll();
 		Assert.assertNotNull(resultList);
-		Assert.assertEquals(extistNumSpeaker+3, resultList.size());
+		Assert.assertEquals(extistNumSpeaker + 3, resultList.size());
 
 		log.info("remove created speaker ...");
 
@@ -163,7 +152,7 @@ public class SpeakerServiceTest {
 
 		resultList = speakerService.getAll();
 		Assert.assertNotNull(resultList);
-		Assert.assertEquals(extistNumSpeaker+1, resultList.size());
+		Assert.assertEquals(extistNumSpeaker + 1, resultList.size());
 
 		log.info("END testGetAll().");
 	}

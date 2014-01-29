@@ -9,12 +9,14 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
 
 import com.prodyna.pac.conference.conference.model.Conference;
 import com.prodyna.pac.conference.location.model.Location;
+import com.prodyna.pac.conference.monitoring.logging.Logged;
+import com.prodyna.pac.conference.monitoring.performance.Monitored;
 
 /**
  * Implementation of ConferenceService.
@@ -22,15 +24,17 @@ import com.prodyna.pac.conference.location.model.Location;
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
  * 
  */
+@Logged
+@Monitored
 @Stateless
 public class ConferenceServiceImpl implements ConferenceService {
 
 	@Inject
 	private Logger log;
-	
+
 	@Inject
 	private EntityManager em;
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -67,16 +71,19 @@ public class ConferenceServiceImpl implements ConferenceService {
 		return conference;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.prodyna.pac.conference.conference.service.ConferenceService#getAll()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.conference.service.ConferenceService#getAll()
 	 */
 	@Override
 	public List<Conference> getAll() {
 		log.info("Select all conferences ...");
 
-		Query selectAllConferencesQuery = em.createNamedQuery(Conference.SELECT_ALL_CONFERENCES);
-		List<Conference> resultList = (List<Conference>) selectAllConferencesQuery
-				.getResultList();
+		TypedQuery<Conference> selectAllConferencesQuery = em.createNamedQuery(
+				Conference.SELECT_ALL_CONFERENCES, Conference.class);
+		List<Conference> resultList = selectAllConferencesQuery.getResultList();
 		if (resultList != null) {
 			log.info("there are " + resultList.size() + " conferences found.");
 		}
@@ -125,17 +132,18 @@ public class ConferenceServiceImpl implements ConferenceService {
 	 */
 	@Override
 	public List<Conference> findConferenceByLocation(Location location) {
-		log.info("Find all conferences for a location with id " + location.getId()
-				+ " ...");
+		log.info("Find all conferences for a location with id "
+				+ location.getId() + " ...");
 
 		Long locationId = location.getId();
-		Query findConferencesByLocationQuery = em
-				.createNamedQuery(Conference.FIND_CONFERENCES_FOR_LOCATION);
+		TypedQuery<Conference> findConferencesByLocationQuery = em
+				.createNamedQuery(Conference.FIND_CONFERENCES_FOR_LOCATION,
+						Conference.class);
 		findConferencesByLocationQuery
 				.setParameter(
 						Conference.FIND_CONFERENCES_FOR_LOCATION_PARAM_NAME_LOCATION_ID,
 						locationId);
-		List<Conference> resultList = (List<Conference>) findConferencesByLocationQuery
+		List<Conference> resultList = findConferencesByLocationQuery
 				.getResultList();
 		if (resultList != null) {
 			log.info("there are " + resultList.size() + " conferences found.");
@@ -143,22 +151,24 @@ public class ConferenceServiceImpl implements ConferenceService {
 		return resultList;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.prodyna.pac.conference.conference.service.ConferenceService#findConferencesStartedStartedAfterDate(java.util.Date)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.prodyna.pac.conference.conference.service.ConferenceService#
+	 * findConferencesStartedStartedAfterDate(java.util.Date)
 	 */
 	@Override
-	public List<Conference> findConferencesStartedAfterDate(
-			Date startDate) {
+	public List<Conference> findConferencesStartedAfterDate(Date startDate) {
 		log.info("Find all conferences started on or after  " + startDate
 				+ " ...");
 
-		Query findConferencesByStartDateQuery = em
-				.createNamedQuery(Conference.FIND_CONFERENCE_BY_START_DATE);
-		findConferencesByStartDateQuery
-				.setParameter(
-						Conference.FIND_CONFERENCE_BY_START_DATE_PARAM_NAME_START_DATE,
-						startDate);
-		List<Conference> resultList = (List<Conference>) findConferencesByStartDateQuery
+		TypedQuery<Conference> findConferencesByStartDateQuery = em
+				.createNamedQuery(Conference.FIND_CONFERENCE_BY_START_DATE,
+						Conference.class);
+		findConferencesByStartDateQuery.setParameter(
+				Conference.FIND_CONFERENCE_BY_START_DATE_PARAM_NAME_START_DATE,
+				startDate);
+		List<Conference> resultList = findConferencesByStartDateQuery
 				.getResultList();
 		if (resultList != null) {
 			log.info("there are " + resultList.size() + " conferences found.");
@@ -166,26 +176,32 @@ public class ConferenceServiceImpl implements ConferenceService {
 		return resultList;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.prodyna.pac.conference.conference.service.ConferenceService#findConferencesByStartDateLocation(com.prodyna.pac.conference.location.model.Location, java.util.Date)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.prodyna.pac.conference.conference.service.ConferenceService#
+	 * findConferencesByStartDateLocation
+	 * (com.prodyna.pac.conference.location.model.Location, java.util.Date)
 	 */
 	@Override
 	public List<Conference> findConferencesByStartDateLocation(
 			Location location, Date startDate) {
 		log.info("Find all conferences started on or after  " + startDate
-				+ " in location "+location.getName()+" ...");
+				+ " in location " + location.getName() + " ...");
 
-		Query findConferencesByStartDateLocationQuery = em
-				.createNamedQuery(Conference.FIND_CONFERENCE_BY_START_DATE_AND_LOCATION);
+		TypedQuery<Conference> findConferencesByStartDateLocationQuery = em
+				.createNamedQuery(
+						Conference.FIND_CONFERENCE_BY_START_DATE_AND_LOCATION,
+						Conference.class);
 		findConferencesByStartDateLocationQuery
 				.setParameter(
 						Conference.FIND_CONFERENCE_BY_START_DATE_AND_LOCATION_PARAM_NAME_START_DATE,
 						startDate);
 		findConferencesByStartDateLocationQuery
-		.setParameter(
-				Conference.FIND_CONFERENCE_BY_START_DATE_AND_LOCATION_PARAM_NAME_LOCATION,
-				location.getId());
-		List<Conference> resultList = (List<Conference>) findConferencesByStartDateLocationQuery
+				.setParameter(
+						Conference.FIND_CONFERENCE_BY_START_DATE_AND_LOCATION_PARAM_NAME_LOCATION,
+						location.getId());
+		List<Conference> resultList = findConferencesByStartDateLocationQuery
 				.getResultList();
 		if (resultList != null) {
 			log.info("there are " + resultList.size() + " conferences found.");

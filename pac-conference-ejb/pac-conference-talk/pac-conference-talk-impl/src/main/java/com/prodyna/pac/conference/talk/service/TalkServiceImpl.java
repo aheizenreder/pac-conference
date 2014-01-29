@@ -17,6 +17,8 @@ import com.prodyna.pac.conference.conference.model.Conference;
 import com.prodyna.pac.conference.location.model.Location;
 import com.prodyna.pac.conference.location.model.Room;
 import com.prodyna.pac.conference.location.service.RoomService;
+import com.prodyna.pac.conference.monitoring.logging.Logged;
+import com.prodyna.pac.conference.monitoring.performance.Monitored;
 import com.prodyna.pac.conference.speaker.model.Speaker;
 import com.prodyna.pac.conference.speaker.service.SpeakerService;
 import com.prodyna.pac.conference.talk.TalkUtil;
@@ -36,6 +38,8 @@ import com.prodyna.pac.conference.talk.service.exception.WrongLocationException;
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
  * 
  */
+@Logged
+@Monitored
 @Stateless
 public class TalkServiceImpl implements TalkService {
 

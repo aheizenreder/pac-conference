@@ -8,11 +8,13 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
 
 import com.prodyna.pac.conference.location.model.Location;
+import com.prodyna.pac.conference.monitoring.logging.Logged;
+import com.prodyna.pac.conference.monitoring.performance.Monitored;
 
 /**
  * Implementation of LocationService.
@@ -20,6 +22,8 @@ import com.prodyna.pac.conference.location.model.Location;
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
  * 
  */
+@Logged
+@Monitored
 @Stateless
 public class LocationServiceImpl implements LocationService {
 
@@ -75,9 +79,9 @@ public class LocationServiceImpl implements LocationService {
 	public List<Location> getAll() {
 		log.info("select all locations ...");
 
-		Query selectAllLocationsQuery = em
-				.createNamedQuery(Location.SELECT_ALL_LOCATIONS);
-		List<Location> resultList = (List<Location>) selectAllLocationsQuery
+		TypedQuery<Location> selectAllLocationsQuery = em
+				.createNamedQuery(Location.SELECT_ALL_LOCATIONS, Location.class);
+		List<Location> resultList = selectAllLocationsQuery
 				.getResultList();
 		if (resultList != null) {
 			log.info("there are " + resultList.size() + " locations found.");

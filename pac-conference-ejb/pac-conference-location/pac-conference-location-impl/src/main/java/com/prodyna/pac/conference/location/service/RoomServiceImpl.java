@@ -8,12 +8,14 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
 
 import com.prodyna.pac.conference.location.model.Location;
 import com.prodyna.pac.conference.location.model.Room;
+import com.prodyna.pac.conference.monitoring.logging.Logged;
+import com.prodyna.pac.conference.monitoring.performance.Monitored;
 
 /**
  * Implementation of RoomService interface.
@@ -21,6 +23,8 @@ import com.prodyna.pac.conference.location.model.Room;
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
  * 
  */
+@Logged
+@Monitored
 @Stateless
 public class RoomServiceImpl implements RoomService {
 
@@ -112,14 +116,13 @@ public class RoomServiceImpl implements RoomService {
 				+ " ...");
 
 		Long locationId = location.getId();
-		Query findRoomByLocationQuery = em
-				.createNamedQuery(Room.FIND_ROOMS_FOR_LOCATION);
+		TypedQuery<Room> findRoomByLocationQuery = em.createNamedQuery(
+				Room.FIND_ROOMS_FOR_LOCATION, Room.class);
 		findRoomByLocationQuery
 				.setParameter(
 						Room.FIND_ROOMS_FOR_LOCATION_PARAM_NAME_LOCATION_ID,
 						locationId);
-		List<Room> resultList = (List<Room>) findRoomByLocationQuery
-				.getResultList();
+		List<Room> resultList = findRoomByLocationQuery.getResultList();
 		if (resultList != null) {
 			log.info("there are " + resultList.size() + " rooms found.");
 		}
@@ -135,9 +138,9 @@ public class RoomServiceImpl implements RoomService {
 	public List<Room> getAll() {
 		log.info("Select all rooms ...");
 
-		Query selectAllRoomsQuery = em.createNamedQuery(Room.SELECT_ALL_ROOMS);
-		List<Room> resultList = (List<Room>) selectAllRoomsQuery
-				.getResultList();
+		TypedQuery<Room> selectAllRoomsQuery = em.createNamedQuery(
+				Room.SELECT_ALL_ROOMS, Room.class);
+		List<Room> resultList = selectAllRoomsQuery.getResultList();
 		if (resultList != null) {
 			log.info("there are " + resultList.size() + " rooms found.");
 		}
