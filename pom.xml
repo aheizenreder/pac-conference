@@ -192,6 +192,16 @@
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.conference</groupId>
+				<artifactId>pac-conference-rest-intf</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.conference</groupId>
+				<artifactId>pac-conference-rest-impl</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

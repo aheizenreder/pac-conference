@@ -12,7 +12,7 @@
       <jar-file>pac-conference-conference-intf.jar</jar-file>
       <jar-file>pac-conference-speaker-intf.jar</jar-file>
       <jar-file>pac-conference-talk-intf.jar</jar-file>
-      <jar-file>pac-conference-talk-impl.jar</jar-file>
+      <jar-file>../pac-conference-talk-impl.jar</jar-file>
       <properties>
          <!-- Properties for Hibernate -->
          <property name="hibernate.hbm2ddl.auto" value="validate" />
