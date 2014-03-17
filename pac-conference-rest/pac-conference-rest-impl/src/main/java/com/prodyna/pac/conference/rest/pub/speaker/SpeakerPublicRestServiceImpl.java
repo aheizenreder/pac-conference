@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.prodyna.pac.conference.rest.pub.location;
+package com.prodyna.pac.conference.rest.pub.speaker;
 
 import java.util.List;
 
@@ -10,42 +10,40 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-import com.prodyna.pac.conference.location.model.Location;
-import com.prodyna.pac.conference.location.service.LocationService;
 import com.prodyna.pac.conference.rest.RestUnknowExceptionHandler;
+import com.prodyna.pac.conference.speaker.model.Speaker;
+import com.prodyna.pac.conference.speaker.service.SpeakerService;
 
 /**
- * Implementation of public REST interface for location service.
+ * Implementation of public REST interface for speaker service.
  * 
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
  * 
  */
 @RequestScoped
-@Path("{access:(admin|public)}/location")
-public class LocationPublicRestServiceImpl implements LocationPublicRestService {
+@Path("{access:(admin|public)}/speaker")
+public class SpeakerPublicRestServiceImpl implements SpeakerPublicRestService {
 
 	@Inject
-	private LocationService locationService;
+	private SpeakerService speakerService;
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.rest.pub.location.LocationPublicRestService
-	 * #getById(long)
+	 * com.prodyna.pac.conference.rest.pub.speaker.SpeakerPublicRestService#
+	 * getById(long)
 	 */
 	@Override
 	public Response getById(long id) {
-
 		Response.ResponseBuilder builder = null;
 
 		try {
-			Location location = locationService.get(id);
-			builder = Response.ok(location);
+			Speaker speaker = speakerService.get(id);
+			builder = Response.ok(speaker);
 		} catch (Exception e) {
 			builder = RestUnknowExceptionHandler.handleUnknowException(e);
 		}
-
 		return builder.build();
 	}
 
@@ -53,20 +51,19 @@ public class LocationPublicRestServiceImpl implements LocationPublicRestService 
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.rest.pub.location.LocationPublicRestService
-	 * #getAll()
+	 * com.prodyna.pac.conference.rest.pub.speaker.SpeakerPublicRestService#
+	 * getAll()
 	 */
 	@Override
 	public Response getAll() {
 		Response.ResponseBuilder builder;
 
 		try {
-			List<Location> allLocation = locationService.getAll();
-			builder = Response.ok(allLocation);
+			List<Speaker> allSpeaker = speakerService.getAll();
+			builder = Response.ok(allSpeaker);
 		} catch (Exception e) {
 			builder = RestUnknowExceptionHandler.handleUnknowException(e);
 		}
 		return builder.build();
 	}
-
 }

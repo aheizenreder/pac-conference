@@ -15,19 +15,19 @@ import com.prodyna.pac.conference.conference.service.ConferenceService;
 import com.prodyna.pac.conference.rest.RestUnknowExceptionHandler;
 
 /**
- * Implementation of public rest interface for conference service.
+ * Implementation of public REST interface for conference service.
  * 
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
- * 
+ *
  */
 @RequestScoped
-@Path("{accessMode:(admin|public)}/conference")
+@Path("{access:(admin|public)}/conference")
 public class ConferencePublicRestServiceImpl implements
 		ConferencePublicRestService {
 
 	@Inject
 	private ConferenceService conferenceService;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

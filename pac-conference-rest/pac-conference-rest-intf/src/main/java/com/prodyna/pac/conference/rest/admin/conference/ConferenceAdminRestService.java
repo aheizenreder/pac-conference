@@ -21,7 +21,7 @@ import com.prodyna.pac.conference.conference.model.Conference;
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
  * 
  */
-public interface ConferenceAdminRestService {
+public interface ConferenceAdminRestService{
 
 	/**
 	 * create new conference.

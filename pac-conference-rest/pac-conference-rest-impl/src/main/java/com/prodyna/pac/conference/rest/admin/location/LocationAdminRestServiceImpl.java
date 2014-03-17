@@ -6,13 +6,11 @@ package com.prodyna.pac.conference.rest.admin.location;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import com.prodyna.pac.conference.location.model.Location;
 import com.prodyna.pac.conference.location.service.LocationService;
 import com.prodyna.pac.conference.rest.RestUnknowExceptionHandler;
-import com.prodyna.pac.conference.rest.pub.location.LocationPublicRestServiceImpl;
 
 /**
  * Implementation of REST interface for location service.
@@ -77,7 +75,7 @@ public class LocationAdminRestServiceImpl implements LocationAdminRestService {
 	 * #delete(long)
 	 */
 	@Override
-	public Response delete(@PathParam("id") long id) {
+	public Response delete(long id) {
 		Response.ResponseBuilder builder;
 
 		try {

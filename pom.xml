@@ -32,6 +32,7 @@
 		<module>pac-conference-ear</module>
 		<module>pac-conference-rest</module>
 		<module>pac-conference-test</module>
+		<module>pac-conference-dist</module>
 	</modules>
 
 	<properties>

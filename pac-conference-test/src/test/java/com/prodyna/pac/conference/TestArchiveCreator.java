@@ -36,12 +36,15 @@ import com.prodyna.pac.conference.monitoring.performance.PerformanceMonitorMXBea
 import com.prodyna.pac.conference.rest.JaxRsActivator;
 import com.prodyna.pac.conference.rest.RestUnknowExceptionHandler;
 import com.prodyna.pac.conference.rest.admin.conference.ConferenceAdminRestService;
+import com.prodyna.pac.conference.rest.admin.conference.ConferenceAdminRestServiceImpl;
 import com.prodyna.pac.conference.rest.admin.location.LocationAdminRestService;
 import com.prodyna.pac.conference.rest.admin.location.LocationAdminRestServiceImpl;
 import com.prodyna.pac.conference.rest.admin.location.RoomAdminRestService;
 import com.prodyna.pac.conference.rest.admin.location.RoomAdminRestServiceImpl;
 import com.prodyna.pac.conference.rest.admin.speaker.SpeakerAdminRestService;
+import com.prodyna.pac.conference.rest.admin.speaker.SpeakerAdminRestServiceImpl;
 import com.prodyna.pac.conference.rest.admin.talk.TalkAdminRestService;
+import com.prodyna.pac.conference.rest.admin.talk.TalkAdminRestServiceImpl;
 import com.prodyna.pac.conference.rest.pub.conference.ConferencePublicRestService;
 import com.prodyna.pac.conference.rest.pub.conference.ConferencePublicRestServiceImpl;
 import com.prodyna.pac.conference.rest.pub.location.LocationPublicRestService;
@@ -49,7 +52,9 @@ import com.prodyna.pac.conference.rest.pub.location.LocationPublicRestServiceImp
 import com.prodyna.pac.conference.rest.pub.location.RoomPublicRestService;
 import com.prodyna.pac.conference.rest.pub.location.RoomPublicRestServiceImpl;
 import com.prodyna.pac.conference.rest.pub.speaker.SpeakerPublicRestService;
+import com.prodyna.pac.conference.rest.pub.speaker.SpeakerPublicRestServiceImpl;
 import com.prodyna.pac.conference.rest.pub.talk.TalkPublicRestService;
+import com.prodyna.pac.conference.rest.pub.talk.TalkPublicRestServiceImpl;
 import com.prodyna.pac.conference.speaker.model.Speaker;
 import com.prodyna.pac.conference.speaker.service.SpeakerService;
 import com.prodyna.pac.conference.speaker.service.SpeakerServiceImpl;
@@ -239,11 +244,16 @@ public class TestArchiveCreator {
 		JavaArchive jar = ShrinkWrap.create(JavaArchive.class,
 				"pac-conference-rest-impl.jar");
 		jar.addClasses(JaxRsActivator.class, RestUnknowExceptionHandler.class,
+				ConferenceAdminRestServiceImpl.class,
 				ConferencePublicRestServiceImpl.class,
-				LocationPublicRestServiceImpl.class,
-				RoomPublicRestServiceImpl.class,
 				LocationAdminRestServiceImpl.class,
-				RoomAdminRestServiceImpl.class);
+				LocationPublicRestServiceImpl.class,
+				RoomAdminRestServiceImpl.class,
+				RoomPublicRestServiceImpl.class,
+				SpeakerAdminRestServiceImpl.class,
+				SpeakerPublicRestServiceImpl.class,
+				TalkAdminRestServiceImpl.class,
+				TalkPublicRestServiceImpl.class);
 		jar.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 
 		return jar;

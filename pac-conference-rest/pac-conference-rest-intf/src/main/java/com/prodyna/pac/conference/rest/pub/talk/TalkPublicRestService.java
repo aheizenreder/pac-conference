@@ -3,13 +3,17 @@
  */
 package com.prodyna.pac.conference.rest.pub.talk;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.prodyna.pac.conference.conference.model.Conference;
+import com.prodyna.pac.conference.location.model.Room;
+import com.prodyna.pac.conference.talk.model.Talk;
 
 /**
  * Public REST interface for talk service.
@@ -43,48 +47,51 @@ public interface TalkPublicRestService {
 	public Response getAll();
 
 	/**
-	 * get all talks of a conference identified by conference id.
+	 * get all talks of a conference.
 	 * 
-	 * @param conferenceId
-	 *            id of conference which talks to return.
+	 * @param conference
+	 *            conference which talks to return.
 	 * @return a list with talks of a conference.
 	 */
 	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findTalksByConference(
-			@QueryParam("conferenceId") long conferenceId);
+	public Response findTalksByConference(Conference conference);
 
 	/**
-	 * get all speakers of a talks identified by talk id.
+	 * get all speakers of a talk.
 	 * 
-	 * @param talkId
-	 *            id of a talk which speakers to return.
+	 * @param talk
+	 *            a talk which speakers to return.
 	 * @return a list with speakers of a talk.
 	 */
 	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findSpeakerByTalk(@QueryParam("talkId") long talkId);
+	public Response findSpeakerByTalk(Talk talk);
 
 	/**
-	 * get all talks by room id.
+	 * get all talks by room.
 	 * 
-	 * @param roomId
-	 *            id of a room which talks to return.
+	 * @param room
+	 *            a room which talks to return.
 	 * @return a list of talks in a room.
 	 */
 	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findTalksByRoom(@QueryParam("roomId") long roomId);
+	public Response findTalksByRoom(Room room);
 
 	/**
 	 * get a room from a talk.
 	 * 
-	 * @param talkId
-	 *            id of a talk which room is to be return.
+	 * @param talk
+	 *            a talk which room is to be return.
 	 * @return a room of a talk.
 	 */
 	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findRoomByTalk(@QueryParam("talkId") long talkId);
+	public Response findRoomByTalk(Talk talk);
 
 }

@@ -3,20 +3,21 @@
  */
 package com.prodyna.pac.conference.rest.admin.location;
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import com.prodyna.pac.conference.location.model.Location;
 import com.prodyna.pac.conference.location.model.Room;
+import com.prodyna.pac.conference.location.service.LocationService;
 import com.prodyna.pac.conference.location.service.RoomService;
 import com.prodyna.pac.conference.rest.RestUnknowExceptionHandler;
+import com.prodyna.pac.conference.rest.admin.location.RoomAdminRestService;
 
 /**
  * Implementation of REST interface for room service.
@@ -30,6 +31,9 @@ public class RoomAdminRestServiceImpl implements RoomAdminRestService {
 
 	@Inject
 	private RoomService roomService;
+	
+	@Inject
+	private LocationService locationService;
 
 	/*
 	 * (non-Javadoc)

@@ -18,13 +18,13 @@ import com.prodyna.pac.conference.location.service.RoomService;
 import com.prodyna.pac.conference.rest.RestUnknowExceptionHandler;
 
 /**
- * Implementation for public REST interface for room service.
+ * Implementation of public REST interface for room service.
  * 
  * @author Andreas Heizenreder (andreas.heizenreder@prodyna.com)
  * 
  */
 @RequestScoped
-@Path("{accessMode:(admin|public)}/room")
+@Path("{access:(admin|public)}/room")
 public class RoomPublicRestServiceImpl implements RoomPublicRestService {
 
 	@Inject
@@ -85,10 +85,15 @@ public class RoomPublicRestServiceImpl implements RoomPublicRestService {
 		Response.ResponseBuilder builder;
 
 		try {
-			Location location = locationService.get(locationId);
-			List<Room> roomsByLocation = roomService
-					.findRoomByLocation(location);
-			builder = Response.ok(roomsByLocation);
+			if (locationId != 0) {
+				Location location = locationService.get(locationId);
+				List<Room> roomsByLocation = roomService
+						.findRoomByLocation(location);
+				builder = Response.ok(roomsByLocation);
+			} else {
+				// if locationId is null or 0 then call getAll()
+				return getAll();
+			}
 		} catch (Exception e) {
 			builder = RestUnknowExceptionHandler.handleUnknowException(e);
 		}

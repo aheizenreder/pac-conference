@@ -42,8 +42,8 @@ public interface SpeakerAdminRestService {
 	 * @param speaker
 	 *            speaker object with new values for update.
 	 * 
-	 * @return updated representation of the speaker after update wrapped in
-	 *         a response object.
+	 * @return updated representation of the speaker after update wrapped in a
+	 *         response object.
 	 */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
